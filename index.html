@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Documentos</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-screen">
+
+  <!-- LOGIN -->
+  <div id="loginModal" class="modal show">
+    <div class="login-content">
+      <h2>Autenticação</h2>
+      <input type="password" id="password" placeholder="Digite a senha">
+      <button id="loginBtn">Entrar</button>
+      <p id="loginError" class="error" hidden>Senha incorreta</p>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" hidden>
+    <h2>Categorias</h2>
+    <ul>
+      <li data-category="aeroespacial" class="active">Aeroespacial</li>
+      <li data-category="defesa">Defesa</li>
+      <li data-category="espaco">Espaço</li>
+      <li data-category="naval">Naval</li>
+      <li data-category="automotivo">Automotivo</li>
+      <li data-category="mineracao">Mineração</li>
+    </ul>
+  </aside>
+
+  <!-- HEADER -->
+  <header hidden>
+    <h1>Gerenciador de Documentos</h1>
+
+    <div class="user-area">
+      <span>Usuário logado</span>
+      <button id="logoutBtn">Sair</button>
+    </div>
+
+    <div class="controls">
+      <label class="btn primary">
+        + Adicionar PDF(s)
+        <input type="file" id="fileInput" accept=".pdf" multiple hidden>
+      </label>
+
+      <button id="btnClear" class="btn danger">Limpar categoria</button>
+
+      <!-- SEARCH -->
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Buscar PDF..." autocomplete="off">
+        <div id="searchSuggestions" class="suggestions"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main hidden>
+    <div id="dropZone" class="pdf-area">
+      <div id="pdf-list" class="pdf-list"></div>
+
+      <div id="no-files" class="empty-message">
+        <p>Nenhum documento nesta categoria ainda.</p>
+        <small>Arraste PDFs aqui ou use o botão acima.</small>
+      </div>
+    </div>
+  </main>
+
+  <!-- VISUALIZADOR DE PDF -->
+  <div id="pdfViewer" class="modal">
+    <div class="modal-content">
+      <button class="close-btn">×</button>
+      <iframe id="pdfFrame"></iframe>
+    </div>
+  </div>
+
+  <!-- MENU DE CONTEXTO -->
+  <div id="contextMenu" class="context-menu" style="display:none; position:fixed; background:white; border:1px solid #ccc; border-radius:4px; box-shadow:2px 2px 8px rgba(0,0,0,0.2); z-index:1000; min-width:160px;">
+    <div id="deleteOption" style="padding:8px 12px; cursor:pointer;">Excluir documento</div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

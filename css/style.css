@@ -1,0 +1,305 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root{
+
+--accent:#800020;
+--accent-hover:#a52a2a;
+--danger:#c0392b;
+
+--gray-light:#f8f9fa;
+--gray-medium:#e9ecef;
+--gray-dark:#6c757d;
+
+--border:#dee2e6;
+
+}
+
+/* BACKGROUND */
+
+body{
+
+font-family:system-ui;
+min-height:100vh;
+display:flex;
+
+background:url("../assets/background.jpg");
+background-size:cover;
+background-position:center;
+
+}
+
+/* quando logado */
+
+body.app{
+
+background:url("../assets/background.jpg");
+background-size:cover;
+background-position:center;
+
+}
+
+/* SIDEBAR */
+
+.sidebar{
+
+width:240px;
+background:rgba(255,255,255,0.92);
+padding:20px;
+height:100vh;
+position:fixed;
+border-right:1px solid var(--border);
+backdrop-filter: blur(4px);
+
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar li{
+
+padding:10px;
+cursor:pointer;
+border-radius:5px;
+
+}
+
+.sidebar li.active{
+
+background:var(--accent);
+color:#fff;
+
+}
+
+/* HEADER */
+
+header{
+margin-left:240px;
+width:calc(100% - 240px);
+padding:20px;
+background:rgba(255,255,255,0.92);
+backdrop-filter: blur(4px);
+}
+
+.controls{
+
+display:flex;
+gap:12px;
+align-items:center;
+
+}
+
+/* BOTÕES */
+
+.btn{
+
+padding:8px 16px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+
+}
+
+.primary{
+
+background:var(--accent);
+color:white;
+
+}
+
+.danger{
+
+background:var(--danger);
+color:white;
+
+}
+
+/* SEARCH */
+
+.search-box{
+
+position:relative;
+
+}
+
+.search-box input{
+
+padding:8px 12px;
+width:220px;
+border:1px solid var(--border);
+border-radius:6px;
+
+}
+
+.suggestions{
+
+position:absolute;
+top:40px;
+background:white;
+border:1px solid var(--border);
+width:220px;
+display:none;
+max-height:200px;
+overflow:auto;
+z-index:100;
+
+}
+
+.suggestions div{
+
+padding:8px;
+cursor:pointer;
+
+}
+
+.suggestions div:hover{
+
+background:var(--gray-medium);
+
+}
+
+/* MAIN */
+
+main{
+
+margin-left:240px;
+padding:20px;
+width:calc(100% - 240px);
+
+}
+
+/* DROP ZONE */
+
+.pdf-area{
+
+height:70vh;
+
+border:2px dashed var(--border);
+
+border-radius:8px;
+
+padding:20px;
+
+overflow-y:auto;
+
+background:rgba(255,255,255,0.90);
+
+backdrop-filter: blur(3px);
+
+}
+
+/* LISTA PDF */
+
+.pdf-list{
+
+display:flex;
+flex-direction:column;
+gap:10px;
+
+}
+
+/* CARD */
+
+.pdf-card{
+
+display:flex;
+gap:12px;
+padding:10px;
+
+border:1px solid var(--border);
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+.pdf-card:hover{
+
+background:var(--gray-light);
+
+}
+
+/* LOGIN */
+
+#loginModal{
+
+position:fixed;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
+
+.login-content{
+
+background:white;
+padding:40px;
+border-radius:10px;
+width:320px;
+
+}
+
+.login-content input{
+
+width:100%;
+padding:10px;
+margin-top:10px;
+
+}
+
+.login-content button{
+
+margin-top:10px;
+width:100%;
+padding:10px;
+
+}
+
+/* MODAL */
+
+.modal{
+
+position:fixed;
+inset:0;
+display:none;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,.7);
+
+}
+
+.modal.show{
+
+display:flex;
+
+}
+
+.modal-content{
+
+width:80vw;
+height:90vh;
+background:white;
+position:relative;
+
+}
+
+.close-btn{
+
+position:absolute;
+right:10px;
+top:10px;
+
+}
+
+#pdfFrame{
+
+width:100%;
+height:100%;
+
+}
