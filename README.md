@@ -1,0 +1,251 @@
+<h1 align="center"> ProjectAPI_SecondSemester </h1>
+<div align="center">
+    <img src="docs/public/img/rubyfox.png" width="170x" height="170x">
+</div>
+
+<div align="center">
+
+# [![Typing SVG](https://readme-typing-svg.demolab.com?font=Roboto&weight=800&size=30&pause=1000&color=F70000&center=true&vCenter=true&width=135&height=31&lines=RUBYFOX+)](https://git.io/typing-svg)
+
+</div>
+
+<ul align="left">
+  <h2>🧾 Índice</h2>
+  <li><a href ="#visao_geral"> Visao Geral</a></li>  
+  <li><a href ="#backlog"> Backlog do Produto</a></li>
+  <li><a href ="#dor">DoR</a></li>
+  <li><a href ="#dod">DoD</a></li>
+  <li><a href ="#sprint"> Cronograma de Sprints</a></li>
+  <li><a href ="#midia">Mídia</a></li>
+  <li><a href ="#tecnologias">Tecnologias</a></li>
+  <li><a href ="#manual">Manual de Instalação</a></li>
+  <li><a href ="#equipe"> Equipe</a></li>
+</ul>
+
+
+---
+
+
+## 👀 Visão Geral <a id="visao_geral"></a>
+
+O desafio consiste...
+ 
+
+---
+
+## 📋 Backlog do Produto <a id="backlog"></a>
+
+| Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
+| :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
+|  1   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
+|  2   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
+|  3   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
+|  4   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
+|  5   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
+|  6   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
+
+
+---
+## ⏰ Status do Projeto sprint 2/3
+
+
+
+## 1️⃣ Sprint 
+<details>
+  <summary><b>Clique aqui</b></summary>
+
+
+| Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
+| :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
+|  1   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
+|  2   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
+
+</details>
+
+## 2️⃣ Sprint 
+<details>
+  <summary><b>Clique aqui</b></summary>
+
+
+| Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
+| :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
+|  1   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
+|  2   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
+
+</details>
+
+## 3️⃣ Sprint 
+<details>
+  <summary><b>Clique aqui</b></summary>
+
+
+| Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
+| :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
+|  1   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
+|  2   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
+
+</details>
+
+---
+
+
+## 🏃‍ DoR - Definition of Ready <a id="dor"></a>
+
+| Critérios                            | Definição                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------- |
+| **???**          | ...        |
+| **???** | ... |
+| **???**  |        ...          |
+
+
+---
+
+## 🏆 Definition of Done <a id="dod"></a>
+
+| Critérios                            | Definição                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------- |
+| **???**          | ...        |
+| **???** | ... |
+| **???**  |        ...          |
+
+
+
+## 📅 Cronograma de Sprints <a id="sprint"></a>
+
+| Sprint          |    Período    | Documentação                                     | Status |
+| --------------- | :-----------: | ------------------------------------------------ | ----- |
+|  **SPRINT 1** | 16/03 - 05/04 | [Sprint1](docs/sprints/sprint1.md) | Em andamento ⏳ |
+|  **SPRINT 2** | 13/04 - 03/05 | [Sprint2](docs/sprints/sprint2.md) | Não iniciado ❌ |
+|  **SPRINT 3** | 11/05 - 31/05 | [Sprint3](docs/sprints/sprint3.md) | Não iniciado ❌ |
+
+---
+
+## 🎥 Mídia <a id="midia"></a>
+
+## Protótipo do Figma
+
+
+## Site Sprint 1
+
+
+
+---
+
+## 💻 Tecnologias <a id="tecnologias"></a>
+
+<h4 align="center">
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+<img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"/>
+<img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/>
+<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/>
+<img src="https://img.shields.io/badge/HTML-FF7E00?style=for-the-badge&logo=html5&logoColor=white"/>
+<img src="https://img.shields.io/badge/JavaScript-FFC30B?style=for-the-badge&logo=JavaScript&logoColor=black"/>
+<img src="https://img.shields.io/badge/MySQL-008ECC?style=for-the-badge&logo=MySQL&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSS-A020F0?style=for-the-badge&logo=CSS&logoColor=white"/>
+<img src="https://img.shields.io/badge/discord-8DCFEC?style=for-the-badge&logo=discord&logoColor=black"/>
+<img src="https://img.shields.io/badge/react-FFFFFF?style=for-the-badge&logo=react&logoColor=black"/>
+ </h4>
+
+---
+
+
+
+## 📖 Manual de Instalação <a id="manual"></a>
+
+### 🛠 Pré-requisitos
+
+---
+
+# 🧭 Guia Rápido de Contribuição
+
+Este é um resumo das principais regras para contribuir com o projeto.  
+Siga estas diretrizes para garantir **organização, rastreabilidade e qualidade no código**.
+
+---
+
+## 🌳 Branches
+
+Adotamos um fluxo baseado em **GitFlow**:
+
+| Tipo | Uso |
+|------|-----|
+| `main` | Código estável |
+| `development` | Código em desenvolvimento |
+
+
+---
+
+## 🧩 Commits
+
+Adotamos um padrão para manter o histórico legível e rastreável.
+
+**Formato:** `tipo/mensagem`
+
+| Tipo       | Descrição                                |
+| :--------- | :--------------------------------------- |
+| `feat`     | Nova funcionalidade                      |
+| `fix`      | Correção de bug                          |
+| `refactor` | Refatoração de código                    |
+| `chore`    | Tarefas de build, config, etc.           |
+| `docs`     | Mudanças na documentação                 |
+| `style`    | Apenas formatação (ponto e vírgula, etc.) |
+| `test`     | Adição ou ajuste de testes               |
+
+---
+
+
+## 🎓 Nossa Equipe <a id="equipe"></a>
+
+<div align="center">
+  <table>
+    <tr>
+      <th>Imagem</th>
+      <th>Membro</th>
+      <th>Função</th>
+      <th>Github</th>
+      <th>Linkedin</th>
+    </tr>
+      <tr>
+      <td><img src="docs/public/members/isabelly.jpg" width="60px" height="60px"></td>
+      <td>Isabelly Pacheco Marinho</td>
+      <td>Product Owner</td>
+      <td><a href="https://github.com/isabellymarinho20"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
+      <td><a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+    </tr>
+    <tr>
+      <td><img src="docs/public/members/rodolfo.jpg" width="60px" height="60px"></td>
+      <td>Rodolfo Ferreira Venâncio</td>
+      <td>Scrum Master</td>
+      <td><a href="https://github.com/Clown0o0"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
+      <td><a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+    </tr>
+    <tr>
+      <td><img width="60px" height="60px" src="docs/public/members/vinicius.jpg" /></td>
+      <td>Vinícius Silva Lopes</td>
+      <td>Desenvolvedor</td>
+      <td><a href="https://github.com/viniciuslopes2"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
+      <td><a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+    </tr>
+    <tr>
+      <td><img src="docs/public/members/rafael.jpg" width="60px" height="60px"></td>
+      <td>Rafael Oliveira</td>
+      <td>Desenvolvedor</td>
+      <td><a href="https://github.com/PatoJosefo"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
+      <td><a href="Front/https://www.linkedin.com/in/rafaelguimaraesoliveira"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+    </tr>
+    <tr>
+      <td><img src="docs/public/members/igor.jpg" width="60px" height="60px"></td>
+      <td>Igor Martins</td>
+      <td>Desenvolvedor</td>
+      <td><a href="https://github.com/IgorMartins0729"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
+      <td><a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+    </tr>
+      <tr>
+      <td><img src="docs/public/members/konishi.jpg" width="60px" height="60px"></td>
+      <td>Vinícius Konishi Gregório</td>
+      <td>Desenvolvedor</td>
+      <td><a href="https://github.com/vinicius-konishi"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
+      <td><a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+    </tr>
+  </table>
+</div>
