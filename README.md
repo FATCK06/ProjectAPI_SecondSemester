@@ -46,7 +46,7 @@ O desafio consiste...
 
 
 ---
-## ⏰ Status do Projeto sprint 2/3
+## ⏰ Status das Sprints do Projeto
 
 
 
@@ -108,7 +108,7 @@ O desafio consiste...
 | **???** | ... |
 | **???**  |        ...          |
 
-
+---
 
 ## 📅 Cronograma de Sprints <a id="sprint"></a>
 
