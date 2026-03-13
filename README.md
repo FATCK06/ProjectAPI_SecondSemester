@@ -42,7 +42,7 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 |  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.                                                                                      |     6      |   1   |    ⏳   |     
 |  4   |    Alta    | Como consultor, quero filtrar normas por órgão, categoria ou palavra-chave, para localizar informações rapidamente.                                          |    5     |   2    |    ⏳  |     
 |  5   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.                                                                                            |     5      |   2   |    ⏳  |     
-|  6   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas                                         |    8      |   2    |    ⏳  |    
+|  6   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ⏳  |    
 |  7   |    Média    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   3    |    ⏳  | 
 |  8   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
 
