@@ -28,8 +28,8 @@
 
 ## 👀 Visão Geral <a id="visao_geral"></a>
 
-O desafio consiste...
- 
+
+O objetivo principal do projeto é o desenvolvimento de uma plataforma web estruturada para centralizar, organizar e correlacionar requisitos normativos aeronáuticos. O sistema visa garantir maior organização, rastreabilidade e eficiência no processo de conformidade regulatória, servindo como uma fonte estruturada de dados para apoiar a análise de profissionais habilitados.
 
 ---
 
@@ -37,12 +37,14 @@ O desafio consiste...
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  1   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
-|  2   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
-|  3   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
-|  4   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
-|  5   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
-|  6   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
+|  1   |   Alta   | Como supervisor, quero cadastrar as normas, para que elas fiquem centralizadas e organizadas.               |     6      |   1    |    ⏳   |     
+|  2   |    Alta    | Como consultor, quero visualizar normas cadastradas na plataforma, para analisar os requisitos normativos.                                          |    5     |   1   |     ⏳  |     
+|  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.                                                                                      |     6      |   1   |    ⏳   |     
+|  4   |    Alta    | Como consultor, quero filtrar normas por órgão, categoria ou palavra-chave, para localizar informações rapidamente.                                          |    5     |   2    |    ⏳  |     
+|  5   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.                                                                                            |     5      |   2   |    ⏳  |     
+|  6   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas                                         |    8      |   2    |    ⏳  |    
+|  7   |    Média    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   3    |    ⏳  | 
+|  8   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
 
 
 ---
@@ -57,8 +59,9 @@ O desafio consiste...
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  1   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
-|  2   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
+|  1   |   Alta   | Como supervisor, quero cadastrar as normas, para que elas fiquem centralizadas e organizadas.               |     6      |   1    |    ⏳   |     
+|  2   |    Alta    | Como consultor, quero visualizar normas cadastradas na plataforma, para analisar os requisitos normativos.                                          |    5     |   1   |     ⏳  |     
+|  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.                                                                                      |     6      |   1   |    ⏳   |     
 
 </details>
 
@@ -69,8 +72,9 @@ O desafio consiste...
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  1   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
-|  2   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
+|  4   |    Alta    | Como consultor, quero filtrar normas por órgão, categoria ou palavra-chave, para localizar informações rapidamente.                                          |    5     |   2    |    ⏳  |     
+|  5   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.                                                                                            |     5      |   2   |    ⏳  |     
+|  6   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas                                         |    8      |   2    |    ⏳  |    
 
 </details>
 
@@ -81,8 +85,8 @@ O desafio consiste...
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  1   |   ?   | Eu, como ..., gostaria de..., para....                                                                                                           |     ?      |   ?    |    ?   |     
-|  2   |    ?    | Eu, como ..., gostaria de..., para....                                                          |    ?      |   ?    |     ?  |     
+|  7   |    Média    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   3    |    ⏳  | 
+|  8   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
 
 </details>
 
