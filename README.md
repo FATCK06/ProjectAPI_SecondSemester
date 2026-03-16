@@ -95,18 +95,21 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 ## 🏃‍ DoR - Definition of Ready <a id="dor"></a>
 
-| Critérios                            | Definição                                                                                     |
+| Título                            | Definição                                                                                     |
 | ------------------------------------ | --------------------------------------------------------------------------------------------- |
-| **???**          | ...        |
-| **???** | ... |
-| **???**  |        ...          |
+| Refinamento de User Stories | Revisar se as histórias de usuário possuem critérios de aceitação claros |
+| Interface e UX |   Validar se os wireframes dos panéis, filtros por órgão/categoria e o fluxo de uso estão disponíveis para implementação  |
+| Alhinhamento de Dados |   Confirmar se o formato de entrada das normas aeronáuticas está validado para integração com o Backend    |
+| Gestão de Seguraça |  Revisar se as definições de níveis de acesso e restrições da captura de conteúdo estão mapeadas tecnicamente   |
+| Estimativa técnica |    Garantir que a tarefa foi pontuada pela equipe utilizando a escala de 1 a 10 e atribuída à sprint correta    |
+| Dependências e Infraestrutura |  Identificar se há dependências externas que impeçam o início do desenvolvimento da task   |
 
 
 ---
 
 ## 🏆 Definition of Done <a id="dod"></a>
 
-| Critérios                            | Definição                                                                                     |
+| Título                            | Definição                                                                                     |
 | ------------------------------------ | --------------------------------------------------------------------------------------------- |
 | **???**          | ...        |
 | **???** | ... |
@@ -137,18 +140,34 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 ## 💻 Tecnologias <a id="tecnologias"></a>
 
-<h4 align="center">
-<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-<img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"/>
-<img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/>
-<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/>
-<img src="https://img.shields.io/badge/HTML-FF7E00?style=for-the-badge&logo=html5&logoColor=white"/>
-<img src="https://img.shields.io/badge/JavaScript-FFC30B?style=for-the-badge&logo=JavaScript&logoColor=black"/>
-<img src="https://img.shields.io/badge/MySQL-008ECC?style=for-the-badge&logo=MySQL&logoColor=white"/>
-<img src="https://img.shields.io/badge/CSS-A020F0?style=for-the-badge&logo=CSS&logoColor=white"/>
-<img src="https://img.shields.io/badge/discord-8DCFEC?style=for-the-badge&logo=discord&logoColor=black"/>
-<img src="https://img.shields.io/badge/react-FFFFFF?style=for-the-badge&logo=react&logoColor=black"/>
- </h4>
+<table align="center">
+  <tr>
+    <th>Linguagens</th>
+    <th>Ferramentas</th>
+    <th>SGBD</th>
+    <th>Bibliotecas & Ambientes</th>
+  </tr>
+  <tr valign="top">
+    <td align="center">
+      <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"><br>
+      <img src="https://img.shields.io/badge/JavaScript-FFC30B?style=for-the-badge&logo=JavaScript&logoColor=black"/><br>
+      <img src="https://img.shields.io/badge/HTML-FF7E00?style=for-the-badge&logo=html5&logoColor=white"/><br>
+      <img src="https://img.shields.io/badge/CSS-A020F0?style=for-the-badge&logo=CSS&logoColor=white"/>
+    </td>
+    <td align="center">
+      <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/><br>
+      <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/><br>
+      <img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"/>
+    </td>
+    <td align="center">
+      <img src="https://img.shields.io/badge/MySQL-008ECC?style=for-the-badge&logo=MySQL&logoColor=white"/>
+    </td>
+    <td align="center">
+      <img src="https://img.shields.io/badge/node.js-green?style=for-the-badge&logo=node.js&logoColor=white"/>
+      <img src="https://img.shields.io/badge/react-FFFFFF?style=for-the-badge&logo=react&logoColor=black"/><br>
+    </td>
+  </tr>
+</table>
 
 ---
 
