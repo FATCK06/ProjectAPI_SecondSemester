@@ -1,5 +1,24 @@
-const PASSWORD = "admin123";
+// =====================
+// USUÁRIOS
+// =====================
+const USERS = {
+  admin: {
+    username: "administrador",
+    password: "admin123",
+    role: "admin"
+  },
+  consultor: {
+    username: "consultor",
+    password: "consultor123",
+    role: "consultor"
+  }
+};
 
+let userRole = null;
+
+// =====================
+// ELEMENTOS
+// =====================
 const fileInput     = document.getElementById("fileInput");
 const pdfList       = document.getElementById("pdf-list");
 const searchInput   = document.getElementById("searchInput");
@@ -18,11 +37,61 @@ const btnClear      = document.getElementById("btnClear");
 let pdfData = {};
 let currentCategory = "aeroespacial";
 
-// Menu de contexto
-let selectedCard = null;
-const contextMenu = document.getElementById("contextMenu");
-const deleteOption = document.getElementById("deleteOption");
+// =====================
+// PERMISSÃO
+// =====================
+function isAdmin() {
+  return userRole === "admin";
+}
 
+// =====================
+// LOGIN
+// =====================
+loginBtn.onclick = () => {
+  const username = document.getElementById("username").value.trim().toLowerCase();
+  const password = document.getElementById("password").value;
+
+  let user = null;
+
+  Object.values(USERS).forEach(u => {
+    if (u.username === username && u.password === password) {
+      user = u;
+    }
+  });
+
+  if (!user) {
+    document.getElementById("loginError").hidden = false;
+    return;
+  }
+
+  userRole = user.role;
+  iniciarSistema(user.username);
+};
+
+function iniciarSistema(nomeUsuario) {
+  loginModal.style.display = "none";
+  sidebar.hidden = false;
+  header.hidden = false;
+  main.hidden   = false;
+
+  document.body.classList.remove("login-screen");
+  document.body.classList.add("app");
+
+  document.querySelector(".user-area span").textContent =
+    userRole === "admin" ? "Administrador" : "Consultor";
+
+  // BLOQUEIOS
+  if (!isAdmin()) {
+    fileInput.parentElement.style.display = "none";
+    btnClear.style.display = "none";
+  }
+
+  loadData();
+}
+
+// =====================
+// DADOS
+// =====================
 function loadData() {
   const saved = localStorage.getItem("pdfManager");
   if (saved) {
@@ -30,11 +99,11 @@ function loadData() {
   } else {
     pdfData = {
       aeroespacial: [],
-      defesa:       [],
-      espaco:       [],
-      naval:        [],
-      automotivo:   [],
-      mineracao:    []
+      defesa: [],
+      espaco: [],
+      naval: [],
+      automotivo: [],
+      mineracao: []
     };
   }
   renderFiles();
@@ -44,6 +113,9 @@ function saveData() {
   localStorage.setItem("pdfManager", JSON.stringify(pdfData));
 }
 
+// =====================
+// RENDER
+// =====================
 function renderFiles() {
   pdfList.innerHTML = "";
 
@@ -53,175 +125,131 @@ function renderFiles() {
     const card = document.createElement("div");
     card.className = "pdf-card";
     card.dataset.index = index;
-    card.innerHTML = `
-      <div>📄</div>
-      <div>${file.name}</div>
-    `;
+    card.innerHTML = `📄 ${file.name}`;
 
-    // Clique esquerdo → abrir
-    card.addEventListener("click", (e) => {
-      if (e.button === 0) {
-        pdfFrame.src = file.url;
-        pdfViewer.classList.add("show");
-      }
-    });
+    card.onclick = () => {
+      pdfFrame.src = file.url;
+      pdfViewer.classList.add("show");
+    };
 
-    // Botão direito → menu contexto
-    card.addEventListener("contextmenu", (e) => {
-      e.preventDefault();
-      selectedCard = card;
-      contextMenu.style.left = `${e.pageX}px`;
-      contextMenu.style.top  = `${e.pageY}px`;
-      contextMenu.style.display = "block";
-    });
+    if (isAdmin()) {
+      card.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        selectedCard = card;
+        contextMenu.style.left = `${e.pageX}px`;
+        contextMenu.style.top  = `${e.pageY}px`;
+        contextMenu.style.display = "block";
+      });
+    }
 
     pdfList.appendChild(card);
   });
 
-  // Mensagem de vazio
-  document.getElementById("no-files").style.display = 
+  document.getElementById("no-files").style.display =
     files.length === 0 ? "block" : "none";
 }
 
-// Fecha visualizador
-function closeViewer() {
-  pdfViewer.classList.remove("show");
-  pdfFrame.src = "";
-}
+// =====================
+// CONTEXTO
+// =====================
+let selectedCard = null;
+const contextMenu = document.getElementById("contextMenu");
+const deleteOption = document.getElementById("deleteOption");
 
-closeBtn.addEventListener("click", closeViewer);
-pdfViewer.addEventListener("click", (e) => {
-  if (e.target === pdfViewer) closeViewer();
-});
+deleteOption.onclick = () => {
+  if (!isAdmin()) return;
 
-// Fecha menu contexto ao clicar fora
-document.addEventListener("click", (e) => {
-  if (!contextMenu.contains(e.target)) {
-    contextMenu.style.display = "none";
-  }
-});
+  const index = parseInt(selectedCard.dataset.index);
+  pdfData[currentCategory].splice(index, 1);
+  saveData();
+  renderFiles();
 
-// Excluir documento
-deleteOption.addEventListener("click", () => {
-  if (!selectedCard) return;
-  if (confirm("Deseja deletar o documento?")) {
-    const index = parseInt(selectedCard.dataset.index);
-    pdfData[currentCategory].splice(index, 1);
-    saveData();
-    renderFiles();
-  }
   contextMenu.style.display = "none";
-  selectedCard = null;
+};
+
+document.addEventListener("click", () => {
+  contextMenu.style.display = "none";
 });
 
-// Mudar categoria (clique na sidebar)
-document.querySelectorAll(".sidebar li").forEach(li => {
-  li.addEventListener("click", () => {
-    document.querySelector(".sidebar .active")?.classList.remove("active");
-    li.classList.add("active");
-    
-    currentCategory = li.dataset.category;
-    renderFiles();
-    searchInput.value = "";
-    suggestions.style.display = "none";
-  });
-});
-
-// Limpar categoria atual
-btnClear.addEventListener("click", () => {
-  if (confirm(`Deseja realmente limpar TODOS os documentos da categoria "${currentCategory}"?`)) {
-    pdfData[currentCategory] = [];
-    saveData();
-    renderFiles();
-  }
-});
-
-// Adicionar via input
+// =====================
+// UPLOAD
+// =====================
 fileInput.addEventListener("change", (e) => {
+  if (!isAdmin()) return;
+
   Array.from(e.target.files).forEach(file => {
     if (file.type === "application/pdf") {
       const url = URL.createObjectURL(file);
       pdfData[currentCategory].push({ name: file.name, url });
     }
   });
+
   saveData();
   renderFiles();
 });
 
-// Drag & Drop
+// =====================
+// DRAG DROP
+// =====================
 dropZone.addEventListener("dragover", e => {
+  if (!isAdmin()) return;
   e.preventDefault();
-  dropZone.style.background = "#eef2f7";
-});
-
-dropZone.addEventListener("dragleave", () => {
-  dropZone.style.background = "white";
 });
 
 dropZone.addEventListener("drop", e => {
+  if (!isAdmin()) return;
+
   e.preventDefault();
-  dropZone.style.background = "white";
+
   Array.from(e.dataTransfer.files).forEach(file => {
     if (file.type === "application/pdf") {
       const url = URL.createObjectURL(file);
       pdfData[currentCategory].push({ name: file.name, url });
     }
   });
+
   saveData();
   renderFiles();
 });
 
-// Busca
-searchInput.addEventListener("input", () => {
-  const term = searchInput.value.toLowerCase().trim();
-  suggestions.innerHTML = "";
+// =====================
+// LIMPAR
+// =====================
+btnClear.addEventListener("click", () => {
+  if (!isAdmin()) return;
 
-  if (!term) {
-    suggestions.style.display = "none";
-    return;
-  }
-
-  const results = pdfData[currentCategory].filter(f => 
-    f.name.toLowerCase().includes(term)
-  );
-
-  results.forEach(file => {
-    const div = document.createElement("div");
-    div.textContent = file.name;
-    div.onclick = () => {
-      pdfFrame.src = file.url;
-      pdfViewer.classList.add("show");
-      suggestions.style.display = "none";
-      searchInput.value = "";
-    };
-    suggestions.appendChild(div);
-  });
-
-  suggestions.style.display = results.length > 0 ? "block" : "none";
+  pdfData[currentCategory] = [];
+  saveData();
+  renderFiles();
 });
 
-// Login
-loginBtn.onclick = () => {
-  const pass = document.getElementById("password").value;
-  if (pass === PASSWORD) {
-    loginModal.style.display = "none";
-    sidebar.hidden = false;
-    header.hidden = false;
-    main.hidden   = false;
-    document.body.classList.remove("login-screen");
-    document.body.classList.add("app");
-    loadData();
-  } else {
-    document.getElementById("loginError").hidden = false;
-  }
+// =====================
+// CATEGORIAS
+// =====================
+document.querySelectorAll(".sidebar li").forEach(li => {
+  li.onclick = () => {
+    document.querySelector(".sidebar .active")?.classList.remove("active");
+    li.classList.add("active");
+
+    currentCategory = li.dataset.category;
+    renderFiles();
+  };
+});
+
+// =====================
+// VISUALIZADOR
+// =====================
+closeBtn.onclick = () => {
+  pdfViewer.classList.remove("show");
+  pdfFrame.src = "";
 };
 
-// Logout simples (recarrega página)
-document.getElementById("logoutBtn")?.addEventListener("click", () => {
-  if (confirm("Deseja sair?")) {
-    location.reload();
-  }
-});
+// =====================
+// LOGOUT
+// =====================
+document.getElementById("logoutBtn").onclick = () => {
+  location.reload();
+};
 
-// Inicialização
+// Init
 loadData();
