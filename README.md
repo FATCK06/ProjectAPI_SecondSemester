@@ -164,6 +164,7 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
     </td>
     <td align="center">
       <img src="https://img.shields.io/badge/node.js-green?style=for-the-badge&logo=node.js&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Next.JS-000000?style=for-the-badge&logo=next.js&logoColor=white"/><br>
       <img src="https://img.shields.io/badge/react-FFFFFF?style=for-the-badge&logo=react&logoColor=black"/><br>
     </td>
   </tr>
@@ -233,21 +234,21 @@ Adotamos um padrão para manter o histórico legível e rastreável.
       <td>Isabelly Pacheco Marinho</td>
       <td>Product Owner</td>
       <td><a href="https://github.com/isabellymarinho20"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
-      <td><a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+      <td><a href="https://www.linkedin.com/in/isabelly-marinho-242653210/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
     </tr>
     <tr>
       <td><img src="docs/public/members/rodolfo.jpg" width="60px" height="60px"></td>
       <td>Rodolfo Ferreira Venâncio</td>
       <td>Scrum Master</td>
       <td><a href="https://github.com/Clown0o0"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
-      <td><a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+      <td><a href="https://www.linkedin.com/in/rodolfo-ferreir4/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
     </tr>
     <tr>
       <td><img width="60px" height="60px" src="docs/public/members/vinicius.jpg" /></td>
       <td>Vinícius Silva Lopes</td>
       <td>Desenvolvedor</td>
       <td><a href="https://github.com/viniciuslopes2"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
-      <td><a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+      <td><a href="https://www.linkedin.com/in/vinícius-silva-lopes-976217296/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
     </tr>
     <tr>
       <td><img src="docs/public/members/rafael.jpg" width="60px" height="60px"></td>
@@ -261,7 +262,7 @@ Adotamos um padrão para manter o histórico legível e rastreável.
       <td>Igor Martins</td>
       <td>Desenvolvedor</td>
       <td><a href="https://github.com/IgorMartins0729"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
-      <td><a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+      <td><a href="https://www.linkedin.com/in/igormrtns/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
     </tr>
       <tr>
       <td><img src="docs/public/members/konishi.jpg" width="60px" height="60px"></td>
