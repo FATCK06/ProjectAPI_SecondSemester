@@ -11,13 +11,10 @@
   <!-- LOGIN -->
   <div id="loginModal" class="modal show">
     <div class="login-content">
-      <h2>Login</h2>
-
-      <input type="text" id="username" placeholder="Nome de Usuário:">
-      <input type="password" id="password" placeholder="Senha de acesso:">
-
+      <h2>Autenticação</h2>
+      <input type="text" id="username" placeholder="Usuário (administrador ou consultor)">
+      <input type="password" id="password" placeholder="Digite a senha">
       <button id="loginBtn">Entrar</button>
-
       <p id="loginError" class="error" hidden>Usuário ou senha incorretos</p>
     </div>
   </div>
@@ -40,18 +37,19 @@
     <h1>Gerenciador de Documentos</h1>
 
     <div class="user-area">
-      <span></span>
+      <span>Usuário logado</span>
       <button id="logoutBtn">Sair</button>
     </div>
 
     <div class="controls">
-      <label class="btn primary">
+      <label class="btn primary" id="addBtnLabel">
         + Adicionar PDF(s)
         <input type="file" id="fileInput" accept=".pdf" multiple hidden>
       </label>
 
       <button id="btnClear" class="btn danger">Limpar categoria</button>
 
+      <!-- SEARCH -->
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="Buscar PDF..." autocomplete="off">
         <div id="searchSuggestions" class="suggestions"></div>
@@ -71,7 +69,7 @@
     </div>
   </main>
 
-  <!-- VISUALIZADOR -->
+  <!-- VISUALIZADOR DE PDF -->
   <div id="pdfViewer" class="modal">
     <div class="modal-content">
       <button class="close-btn">×</button>
@@ -79,9 +77,9 @@
     </div>
   </div>
 
-  <!-- MENU CONTEXTO -->
-  <div id="contextMenu" class="context-menu" style="display:none; position:fixed;">
-    <div id="deleteOption">Excluir documento</div>
+  <!-- MENU DE CONTEXTO -->
+  <div id="contextMenu" class="context-menu" style="display:none; position:fixed; background:white; border:1px solid #ccc; border-radius:4px; box-shadow:2px 2px 8px rgba(0,0,0,0.2); z-index:1000; min-width:160px;">
+    <div id="deleteOption" style="padding:8px 12px; cursor:pointer;">Excluir documento</div>
   </div>
 
   <script src="js/script.js"></script>
