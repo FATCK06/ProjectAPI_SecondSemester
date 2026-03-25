@@ -173,6 +173,8 @@ fileInput.addEventListener("change", (e) => {
 
         saveData();
         renderFiles();
+
+        fileInput.value = "";
       };
 
       reader.readAsDataURL(file);
@@ -182,10 +184,19 @@ fileInput.addEventListener("change", (e) => {
 
 
 // Drag & Drop (só admin)
-dropZone.addEventListener("drop", e => {
+dropZone.addEventListener("dragover", e => {
+  e.preventDefault(); // SEMPRE roda
+
   if (currentRole !== "admin") return;
 
-  e.preventDefault();
+  dropZone.style.background = "#eef2f7";
+});
+
+dropZone.addEventListener("drop", e => {
+  e.preventDefault(); // SEMPRE roda
+
+  if (currentRole !== "admin") return;
+
   dropZone.style.background = "white";
 
   Array.from(e.dataTransfer.files).forEach(file => {
@@ -206,6 +217,7 @@ dropZone.addEventListener("drop", e => {
     }
   });
 });
+
 
 
 // Busca
