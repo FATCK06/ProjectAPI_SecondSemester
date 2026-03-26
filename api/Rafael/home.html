@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+
+    <div class="container">
+        <aside class="sidebar">
+            <img src="../img/logo-akaer.png" alt="Logo Akaer" class="logo-img" />
+            <div class="separador"></div>
+            
+            <ul class="nav-links">
+                <li><a href="home.html" class="active"><span class="material-icons">home</span> Home</a></li>
+                
+                <li><a href="#"><span class="material-icons">group</span> Gerenciar Usuários</a></li>
+                <li><a href="#"><span class="material-icons">article</span> Normas</a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="user-data"> 
+                    <p class="nome-usuario">Usuário 1</p>
+                    <p class="cargo-usuario">Administrador</p>
+                </div>
+                <a href="#" class="logout-botao">
+                    <span class="material-icons">logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="content">
+            <h2>Visualização de Normas</h2>
+
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" onclick="openTab(event, 'recentes')">Recentes</button>
+                    <button class="tab-btn" onclick="openTab(event, 'favoritas')">Favoritas</button>
+                    <button class="tab-btn" onclick="openTab(event, 'todas')">Todas as Normas</button>
+                </div>
+
+                
+                <!-- Tab de recentes -->
+                <div id="recentes" class="tab-content active">
+                </div>
+
+
+                <!-- Tab de favoritos -->
+                <div id="favoritas" class="tab-content">
+                </div>
+
+
+                <!-- Tab de todas as normas -->
+                <div id="todas" class="tab-content">
+                   <div class="box-titulos">
+                        <p class="info-principal">Título da Norma:</p>
+                        <p class="tipo">Tipo de Arquivo:</p>
+                        <p class="status">Status:</p>
+                        <div class="espaco-botao"></div> 
+                    </div>
+
+
+                    <div class="box-normas">
+                        <div class="lista-normas">
+                            <div class="card-norma">
+                                <div class="info-principal">
+                                    <strong>Norma 1</strong>
+                                    <span style="font-size: 10px; color: #999;">Usuário 1</span>
+                                </div>
+                                <div class="tipo">PDF</div>
+                                <div class="status">Aprovado</div>
+                                <button class="btn-visualizar">Visualizar</button>
+                            </div>
+                            <div class="card-norma">
+                                <div class="info-principal">
+                                    <strong>Norma 2</strong>
+                                    <span style="font-size: 10px; color: #999;">Usuário 1</span>
+                                </div>
+                                <div class="tipo">PDF</div>
+                                <div class="status">Aprovado</div>
+                                <button class="btn-visualizar">Visualizar</button>
+                            </div>
+                            <div class="card-norma">
+                                <div class="info-principal">
+                                    <strong>Norma 3</strong>
+                                    <span style="font-size: 10px; color: #999;">Usuário 1</span>
+                                </div>
+                                <div class="tipo">PDF</div>
+                                <div class="status">Aprovado</div>
+                                <button class="btn-visualizar">Visualizar</button>
+                            </div>
+                            <div class="card-norma">
+                                <div class="info-principal">
+                                    <strong>Norma 4</strong>
+                                    <span style="font-size: 10px; color: #999;">Usuário 1</span>
+                                </div>
+                                <div class="tipo">PDF</div>
+                                <div class="status">Aprovado</div>
+                                <button class="btn-visualizar">Visualizar</button>
+                            </div>
+                            <div class="card-norma">
+                                <div class="info-principal">
+                                    <strong>Norma 5</strong>
+                                    <span style="font-size: 10px; color: #999;">Usuário 1</span>
+                                </div>
+                                <div class="tipo">PDF</div>
+                                <div class="status">Aprovado</div>
+                                <button class="btn-visualizar">Visualizar</button>
+                            </div>
+                            <div class="card-norma">
+                                <div class="info-principal">
+                                    <strong>Norma 6</strong>
+                                    <span style="font-size: 10px; color: #999;">Usuário 1</span>
+                                </div>
+                                <div class="tipo">PDF</div>
+                                <div class="status">Aprovado</div>
+                                <button class="btn-visualizar">Visualizar</button>
+                            </div>
+                            <div class="card-norma">
+                                <div class="info-principal">
+                                    <strong>Norma 7</strong>
+                                    <span style="font-size: 10px; color: #999;">Usuário 1</span>
+                                </div>
+                                <div class="tipo">PDF</div>
+                                <div class="status">Aprovado</div>
+                                <button class="btn-visualizar">Visualizar</button>
+                            </div>
+                            <div class="card-norma">
+                                <div class="info-principal">
+                                    <strong>Norma 8</strong>
+                                    <span style="font-size: 10px; color: #999;">Usuário 1</span>
+                                </div>
+                                <div class="tipo">PDF</div>
+                                <div class="status">Aprovado</div>
+                                <button class="btn-visualizar">Visualizar</button>
+                            </div>
+                            <div class="card-norma">
+                                <div class="info-principal">
+                                    <strong>Norma 9</strong>
+                                    <span style="font-size: 10px; color: #999;">Usuário 1</span>
+                                </div>
+                                <div class="tipo">PDF</div>
+                                <div class="status">Aprovado</div>
+                                <button class="btn-visualizar">Visualizar</button>
+                            </div>
+                            <div class="card-norma">
+                                <div class="info-principal">
+                                    <strong>Norma 10</strong>
+                                    <span style="font-size: 10px; color: #999;">Usuário 1</span>
+                                </div>
+                                <div class="tipo">PDF</div>
+                                <div class="status">Aprovado</div>
+                                <button class="btn-visualizar">Visualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+<script src="home.js"></script>
+</body>
+</html>
