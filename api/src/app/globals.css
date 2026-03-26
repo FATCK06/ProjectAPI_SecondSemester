@@ -1,49 +1,29 @@
 /* Import Fonts*/
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-/* Import Tailwind */
-@import "tailwindcss";
+/* variaverl de cor */
+:root {
+  --primaria-vinho: #74213C;
+}
 
-
+/* Deixando padrão */
 * {
   margin: 0;
   padding: 0;
 }
 
-@layer base {
-  body {
-  font-family:"Open Sans", sans-serif;
-  }
-
-  h1 {
-    display: block;
-    font-size: 2em;
-    margin-top: 0.67em;
-    margin-bottom: 0.67em;
-    font-weight: bold;
-  }
-  h2 {
-    display: block;
-    font-size: 1.5em;
-    margin-top: 0.83em;
-    margin-bottom: 0.83em;
-    font-weight: bold;
-  }
-
-  h3 {
-    display: block;
-    font-size: 1.17em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    font-weight: bold;
-  }
-
-  h4 {
-    display: block;
-    font-size: 1em;
-    margin-top: 1.33em;
-    margin-bottom: 1.33em;
-    font-weight: bold;
-  }
+body {
+  font-family: "Open Sans", sans-serif;
 }
 
+/* Para que Sidebar fique na esquerda e p contéudo na direita vou colocar no CSS global */
+
+.layout-sistema {
+  display: flex;
+  min-height: 100vh;
+}
+
+.conteudo-sistema {
+  flex: 1; 
+  background-color: #ffffff;
+}
