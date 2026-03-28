@@ -1,59 +1,115 @@
-import Link from "next/link";
-import styles from "./Sidebar.module.css";
-import { Home, Users, FileText, Menu, CircleUserRound, LogOut } from "lucide-react";
+"use client";
 
-export function Sidebar() {
-    const usuario = {
-        nome: "Carlos Alberto",
-        cargo: "Consultor"
-    };
+import { useState } from "react";
+import Link from "next/link";
+import {
+    Home,
+    Layers,
+    Wrench,
+    ClipboardList,
+    PlusCircle,
+    Users,
+    UserCircle,
+    LogOut,
+    TextAlignJustify,
+    ChevronDown,
+    Package,
+    Blocks,
+    Plug,
+    BookMarked
+} from "lucide-react";
+import styles from "./Sidebar.module.css";
+
+export default function Sidebar() {
+    const [isCategoriasOpen, setIsCategoriasOpen] = useState(false);
 
     return (
         <aside className={styles.sidebar}>
+
+            {/* Estilos do Topo */}
             <div className={styles.header}>
-                <img src="/images/logo.png" alt="Akaer Log" className={styles.logo} />
+                <img src="/images/logo2.png" alt="Logo" className={styles.logo} />
                 <button className={styles.menuIconButton}>
-                    <Menu size={24} color="#333"></Menu>
+                    <TextAlignJustify size={20} color="#000000" />
                 </button>
             </div>
 
             <hr className={styles.separator} />
 
-            {/* navegação*/}
+            {/* Estilos da Navegação */}
             <nav className={styles.nav}>
-                <Link href="/dashboard" className={`${styles.navLink} ${styles.active}`}>
-                    <Home size={22} className={styles.linkIcon} />
-                    <span>Home</span>
+
+                <Link href="/home" className={styles.navLink}>
+                    <Home className={styles.linkIcon} size={20} /> Home
                 </Link>
 
-                <Link href="/normas" className={styles.navLink}>
-                    <FileText size={22} className={styles.linkIcon} />
-                    <span>Normas</span>
+                <div className={`${styles.navLink} ${styles.categoryTitle}`} onClick={() => setIsCategoriasOpen(!isCategoriasOpen)}>
+                    <div className={styles.categoryContent}>
+                        <Layers className={styles.linkIcon} size={20} /> Categorias
+                    </div>
+                    
+                    <div className={styles.categoryArrow}>
+                        {isCategoriasOpen ? <ChevronDown size={18} /> : <ChevronDown size={18} />}
+                    </div>
+                </div>
+
+                <div className={`${styles.dropdownItems} ${isCategoriasOpen ? styles.open : ""}`}>
+                    <Link href="/categorias/peca" className={`${styles.navLink} ${styles.subLink}`}>
+                        <Package className={styles.linkIcon} size={18} /> Peças
+                    </Link>
+
+                    <Link href="/categorias/conjunto" className={`${styles.navLink} ${styles.subLink}`}>
+                        <Blocks className={styles.linkIcon} size={18} /> Conjunto
+                    </Link>
+
+                    <Link href="/categorias/instalacoes" className={`${styles.navLink} ${styles.subLink}`}>
+                        <Plug className={styles.linkIcon} size={18} /> Instalações
+                    </Link>
+
+                    <Link href="/categorias/geral" className={`${styles.navLink} ${styles.subLink}`}>
+                        <BookMarked className={styles.linkIcon} size={18} /> Geral
+                    </Link>
+                </div>
+
+                <Link href="/cadastrar" className={styles.navLink}>
+                    <PlusCircle className={styles.linkIcon} size={20} /> Cadastrar Normas
                 </Link>
+
+                <Link href="/solicitacoes" className={styles.navLink}>
+                    <ClipboardList className={styles.linkIcon} size={20} /> Solicitações de Normas
+                </Link>
+
             </nav>
 
             <div className={styles.spacer}></div>
 
-            
-            <footer className={styles.footer}>
-                <hr className={styles.separator} />
+            {/* Estilos do Rodapé */}
+            <div className={styles.footer}>
 
-                <div className={styles.userContainer}>
-                   
-                    <CircleUserRound size={40} color="#ccc" strokeWidth={1} />
-
-                    <div className={styles.userInfo}>
-                        <span className={styles.userName}>{usuario.nome}</span>
-                        <span className={styles.userRole}>{usuario.cargo}</span>
-                    </div>
-
-                    
-                    <Link href="/login" className={styles.logoutBtn}>
-                        <LogOut size={20} color="#333" />
+                <div style={{ padding: '0 16px 12px 16px' }}>
+                    <Link href="/usuarios" className={styles.navLink}>
+                        <Users className={styles.linkIcon} size={20} /> Gerenciar Usuários
                     </Link>
                 </div>
-            </footer>
+
+                <hr className={styles.separator} />
+
+                {/* Container do Usuário Logado */}
+                <div className={styles.userContainer}>
+                    <UserCircle size={36} color="#000000" />
+
+                    <div className={styles.userInfo}>
+                        <span className={styles.userName}>Neymar Martins</span>
+                        <span className={styles.userRole}>Administrador</span>
+                    </div>
+
+                    <button className={styles.logoutBtn} title="Sair do sistema">
+                        <LogOut size={20} color="#000000" />
+                    </button>
+                </div>
+
+            </div>
 
         </aside>
-    )
+    );
 }
