@@ -50,7 +50,6 @@ export default function CadastrarNorma() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert(`Formulário enviado com ${files.length} arquivos! Lógica de salvamento entra aqui.`);
-    // Aqui você vai pegar os dados dos inputs e fazer o envio para o banco de dados/localStorage
   };
 
   return (
@@ -61,20 +60,28 @@ export default function CadastrarNorma() {
         
         {/* COLUNA ESQUERDA: FORMULÁRIO */}
         <div className={styles.form}>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Código da Norma:<span className={styles.required}>*</span></label>
+            <input type="text" className={styles.input} placeholder="Código da Norma" required />
+          </div>
+
           <div className={styles.formGroup}>
             <label className={styles.label}>Título da Norma: <span className={styles.required}>*</span></label>
-            <input type="text" className={styles.input} placeholder="Insira um título" required />
+            <input type="text" className={styles.input} placeholder="Insira um título" required/>
           </div>
 
           <div className={styles.formGroup}>
+            <label className={styles.label}>Descrição da Norma</label>
+            <input type="" className={styles.input} placeholder="Insira a descrição"/>
+          </div>
+
+          <div className={styles.formGroup}> {/* aqui tem que ser dropdown*/}
             <label className={styles.label}>Categoria</label>
-            <input type="text" className={styles.input} placeholder="Insira categoria" />
+            <input type="text" className={styles.input} placeholder="Insira categoria" required/>
           </div>
 
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Número da Norma:</label>
-            <input type="text" className={styles.input} placeholder="Número da Norma" />
-          </div>
+          
 
           <div className={styles.formGroup}>
             <label className={styles.label}>Escopo:</label>

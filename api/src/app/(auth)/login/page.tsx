@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./page.module.css";
+import styles from "./login.module.css";
 import { User, Lock, Eye, EyeOff } from "lucide-react";
 import { verificarLogin } from "@/services/auth";
 
