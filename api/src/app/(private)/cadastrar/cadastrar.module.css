@@ -1,93 +1,124 @@
 .container {
-  padding: 20px; 
+  padding: 30px; 
   color: #333333;
-  max-width: 1800px; 
+  max-width: 1400px; 
   margin: 0 auto;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   margin-bottom: 32px;
 }
 
+/* Ajuste do layout grid dividindo em duas colunas, exatamente como o Figma */
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.2fr 0.8fr; /* Coluna esquerda ligeiramente maior */
+  gap: 50px;
 }
 
-.form {
+.leftColumn {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-left: 22px;
+  gap: 20px;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* FIX BUG: Inputs grudados. Transformamos em Flex e forçamos margens e larguras */
+.rowSplit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  width: 100%;
+}
+
+.rowSplit > div {
+  flex: 1; /* Garante que os dois campos ocupem 50% cada */
+  min-width: 0; /* Previne que o input quebre o layout do flex */
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
 }
 
 .label {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
+  color: #333;
 }
 
 .required {
   color: #D32F2F;
 }
 
-.input {
+.input, .select, .textarea {
   padding: 12px 16px;
-  border: 1px solid #D9D9D9;
-  border-radius: 8px;
+  border: 1px solid #D9D9D9 !important;
+  border-radius: 8px !important; 
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s;
   background-color: #ffffff;
+  width: 100%;
+  font-family: inherit;
 }
 
-.input:focus {
-  border-color: var(--primaria-vinho);
+.textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
-.submitWrapper {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 16px;
+.input:focus, .select:focus, .textarea:focus {
+  border-color: #7A2E44; /* Cor vinho primária */
 }
 
-.submitBtn {
-  background-color: var(--primaria-vinho);
-  color: #ffffff;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
+.input:disabled, .select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  color: #888;
+}
+
+/* Wrapper para inputs com ícone (ex: cadeado) */
+.inputIconWrapper {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: filter 0.2s;
 }
 
-.submitBtn:hover {
-  filter: brightness(0.9);
+.inputIcon {
+  position: absolute;
+  right: 16px;
+  color: #333;
 }
 
+/* Select customizado (opcional para ocultar seta no disabled) */
+select:disabled {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Área de Upload igual ao Figma */
 .uploadSection {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-top: 20px;
 }
 
 .dropzone {
-  border: 2px dashed #D9D9D9;
-  border-radius: 12px;
-  padding: 60px 20px;
+  border: 2px dashed #BDBDBD;
+  border-radius: 4px; /* Mais quadrado como no Figma */
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,22 +127,33 @@
   cursor: pointer;
   transition: all 0.2s ease;
   background-color: #ffffff;
+  min-height: 200px;
 }
 
 .dragging {
-  border-color: var(--primaria-vinho);
+  border-color: #7A2E44;
   background-color: #f8f9fa;
 }
 
-.uploadIcon {
-  color: var(--primaria-vinho);
-  margin-bottom: 16px;
+/* O ícone dentro de uma caixa com cor de fundo no Figma */
+.uploadIconBackground {
+  background-color: #7A2E44; /* Vinho */
+  border-radius: 8px;
+  width: 70px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  /* Formato lembrando um documento */
+  border-top-right-radius: 25px; 
 }
 
 .dropzoneText {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 8px;
+  color: #333;
 }
 
 .dropzoneSubText {
@@ -123,6 +165,7 @@
   display: none;
 }
 
+/* Lista de arquivos carregados */
 .fileCard {
   display: flex;
   align-items: center;
@@ -154,4 +197,55 @@
 
 .deleteBtn:hover {
   color: #D32F2F;
+}
+
+/* Botão Submit Figma - posicionado na direita abaixo de tudo */
+.submitWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.submitBtn {
+  background-color: #7A2E44; /* Primária Vinho */
+  color: #ffffff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: filter 0.2s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.submitBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Feedback de mensagens (sucesso/erro) */
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.alertSuccess {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+  border: 1px solid #C8E6C9;
+}
+
+.alertError {
+  background-color: #FFEBEE;
+  color: #C62828;
+  border: 1px solid #FFCDD2;
 }
