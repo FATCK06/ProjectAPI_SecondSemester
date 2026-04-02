@@ -1,0 +1,304 @@
+.container {
+  padding: 36px 40px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #75777A;
+}
+
+/* Cards de resumo */
+.statsRow {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 24px;
+  border: 1px solid #E5E5E5;
+  border-radius: 10px;
+  background-color: #fafafa;
+  min-width: 140px;
+}
+
+.statCardAprovado {
+  border-left: 4px solid #2E7D32;
+}
+
+.statCardPendente {
+  border-left: 4px solid #E65100;
+}
+
+.statValue {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: #75777A;
+  font-weight: 500;
+}
+
+/* Busca */
+.searchWrapper {
+  position: relative;
+  margin-bottom: 20px;
+  max-width: 480px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #75777A;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 11px 16px 11px 42px;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+  background-color: #fff;
+}
+
+.searchInput:focus {
+  border-color: #74213C;
+}
+
+/* Wrapper da Tabela (scroll horizontal em telas menores) */
+.tableWrapper {
+  border: 1px solid #E5E5E5;
+  border-radius: 10px;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+/* Estados de loading/vazio */
+.loadingState,
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 20px;
+  color: #75777A;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid #E5E5E5;
+  border-top-color: #74213C;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Tabela */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.th {
+  padding: 13px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  color: #555;
+  background-color: #F7F7F7;
+  border-bottom: 1px solid #E5E5E5;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.sortable {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  /* NOTE: th com display flex precisa de workaround — usaremos gap normal */
+  gap: 6px;
+}
+
+.sortable:hover {
+  color: #74213C;
+}
+
+.sortIcon {
+  color: #BDBDBD;
+  flex-shrink: 0;
+}
+
+.sortActive {
+  color: #74213C;
+}
+
+.tr {
+  border-bottom: 1px solid #F0F0F0;
+  transition: background-color 0.15s;
+}
+
+.tr:last-child {
+  border-bottom: none;
+}
+
+.tr:hover {
+  background-color: #FDF7F8;
+}
+
+.td {
+  padding: 14px 16px;
+  color: #333;
+  vertical-align: middle;
+}
+
+/* Botão favoritar */
+.favBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #BDBDBD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.favBtn:hover {
+  color: #74213C;
+}
+
+.favActive {
+  color: #74213C;
+}
+
+/* Código */
+.codigo {
+  font-weight: 600;
+  color: #74213C;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Título + órgão empilhados */
+.tituloNorma {
+  display: block;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+}
+
+.orgaoSub {
+  display: none; /* Já temos coluna de órgão separada */
+}
+
+/* Badge tipo arquivo */
+.tipoBadge {
+  display: inline-block;
+  padding: 3px 10px;
+  background-color: #F0F0F0;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  letter-spacing: 0.5px;
+}
+
+/* Badges de status */
+.statusBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusAprovado {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+}
+
+.statusPendente {
+  background-color: #FFF3E0;
+  color: #E65100;
+}
+
+.statusReprovado {
+  background-color: #FFEBEE;
+  color: #C62828;
+}
+
+/* Botão Visualizar */
+.visualizarBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background-color: #74213C;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: filter 0.2s;
+  white-space: nowrap;
+}
+
+.visualizarBtn:hover:not(:disabled) {
+  filter: brightness(0.88);
+}
+
+.visualizarBtn:disabled {
+  background-color: #D9D9D9;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Rodapé da tabela */
+.tableFooter {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #75777A;
+  text-align: right;
+}

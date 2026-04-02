@@ -1,7 +1,7 @@
 .container {
   padding: 30px; 
   color: #333333;
-  max-width: 1400px; 
+  max-width: 1700px; 
   margin: 0 auto;
 }
 
@@ -34,7 +34,7 @@
 .rowSplit {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 50px;
   width: 100%;
 }
 
