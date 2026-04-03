@@ -1,0 +1,328 @@
+.pageContainer {
+  padding: 40px;
+  background-color: #F8F9FA;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.wizardContainer {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  padding: 40px;
+}
+
+/* Stepper (Passo a Passo) */
+.stepperWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.stepCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #F0F0F0;
+  color: #75777A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.activeCircle {
+  background-color: #7A2E44; /* Vinho */
+  color: #ffffff;
+}
+
+.stepLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9E9E9E;
+  transition: color 0.3s;
+}
+
+.activeLabel {
+  color: #1a1a1a;
+}
+
+.stepLine {
+  flex: 1;
+  height: 2px;
+  background-color: #F0F0F0;
+  margin: 0 16px;
+  margin-bottom: 24px; /* Compensar a label abaixo do círculo */
+  transition: background-color 0.3s;
+}
+
+.activeLine {
+  background-color: #7A2E44;
+}
+
+/* Conteúdo dos Passos */
+.stepContent {
+  min-height: 300px;
+}
+
+.stepTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.stepSubtitle {
+  font-size: 14px;
+  color: #75777A;
+  margin-bottom: 32px;
+}
+
+/* Formulário Passo 1 */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Ocupar a linha inteira */
+.formGroupFull {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 16px;
+  color: #75777A;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px 14px 44px;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+/* Input de senha tem padding extra na direita para o botão do olho */
+.inputPassword {
+  width: 100%;
+  padding: 14px 44px 14px 44px;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus, .inputPassword:focus { border-color: #7A2E44; }
+
+.inputError {
+  border-color: #D32F2F !important;
+}
+
+.errorText {
+  color: #D32F2F;
+  font-size: 12px;
+  margin-top: -4px;
+}
+
+/* NOVO: Texto de Aviso de Segurança da Senha */
+.warningText {
+  color: #75777A;
+  font-size: 12px;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* Botão de Visibilidade da Senha */
+.eyeBtn {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #75777A;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.eyeBtn:hover {
+  color: #1a1a1a;
+}
+
+/* Radio Cards Passo 2 */
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hiddenRadio {
+  display: none;
+}
+
+.radioCard {
+  border: 2px solid #E5E5E5;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.radioCardActive {
+  border-color: #7A2E44;
+  background-color: #FAF4F6;
+}
+
+.radioHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.radioCheckmark {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #D9D9D9;
+  position: relative;
+}
+
+.radioCardActive .radioCheckmark {
+  border-color: #7A2E44;
+}
+
+.radioCardActive .radioCheckmark::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background-color: #7A2E44;
+}
+
+.radioTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.radioDesc {
+  font-size: 14px;
+  color: #75777A;
+  padding-left: 32px;
+}
+
+/* Resumo Passo 3 */
+.summaryCard {
+  background-color: #FAFAFA;
+  border: 1px solid #E5E5E5;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #F0F0F0;
+}
+.summaryRow:last-child { border-bottom: none; padding-bottom: 0; }
+
+.summaryLabel { color: #75777A; font-size: 14px; }
+.summaryValue { font-weight: 600; color: #1a1a1a; font-size: 15px; }
+
+.summaryBadge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badgeAdmin { background-color: #FCE4EC; color: #C2185B; }
+.badgeRevisor { background-color: #E3F2FD; color: #1565C0; }
+.badgeConsultor { background-color: #F5F5F5; color: #616161; }
+
+/* Botões do Rodapé */
+.wizardFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #E5E5E5;
+}
+
+.btnSecondary {
+  background-color: transparent;
+  color: #333;
+  border: 1px solid #D9D9D9;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.btnSecondary:hover { background-color: #F5F5F5; }
+
+.btnPrimary {
+  background-color: #7A2E44;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.btnPrimary:hover:not(:disabled) { background-color: #5c2233; }
+.btnPrimary:disabled { opacity: 0.5; cursor: not-allowed; }

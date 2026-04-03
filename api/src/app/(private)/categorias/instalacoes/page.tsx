@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Eye, Star, Search, X, FileText, User, Calendar } from "lucide-react";
 import { supabase } from "@/services/supabase";
-import styles from "./geral.module.css";
+import styles from "./instalacao.module.css";
 
 interface Norma {
   id_norma: number;
@@ -38,7 +38,7 @@ const getSafeDateYMD = (dataString: string | null) => {
   return dataString.split('T')[0];
 };
 
-export default function NormasGeral() {
+export default function NormasInstalacao() {
   const [normas, setNormas] = useState<Norma[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [revisorNome, setRevisorNome] = useState("Não atribuído");
@@ -66,7 +66,7 @@ export default function NormasGeral() {
       const { data } = await supabase
         .from("tb_normas")
         .select(`*, tb_orgaos ( nome_completo_orgao, sigla_orgao ), tb_subcategoria ( nome_subcategoria ), tb_tipo ( nome_tipo )`)
-        .eq('id_categoria', 4) 
+        .eq('id_categoria', 3) 
         .order("id_norma", { ascending: false });
 
       if (data) setNormas(data as Norma[]);
@@ -140,7 +140,7 @@ export default function NormasGeral() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div><h1 className={styles.title}>Normas Gerais</h1><p className={styles.subtitle}>Gerencie e consulte todas as normas de categoria Geral.</p></div>
+        <div><h1 className={styles.title}>Normas de Instalação</h1><p className={styles.subtitle}>Gerencie e consulte todas as normas de categoria Instalação.</p></div>
       </div>
 
       <div className={styles.toolbar}>

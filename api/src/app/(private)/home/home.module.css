@@ -3,7 +3,7 @@
   max-width: 1600px;
   margin: 0 auto;
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: #F8F9FA;
 }
 
 /* Header */
@@ -15,290 +15,466 @@
 }
 
 .title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 4px;
 }
 
 .subtitle {
-  font-size: 14px;
+  font-size: 15px;
   color: #75777A;
 }
 
-/* Cards de resumo */
-.statsRow {
+/* Toolbar: Abas e Pesquisa */
+.toolbar {
   display: flex;
-  gap: 16px;
-  margin-bottom: 28px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #E0E0E0;
+  margin-bottom: 24px;
 }
 
-.statCard {
+.tabsContainer {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 16px 24px;
-  border: 1px solid #E5E5E5;
-  border-radius: 10px;
-  background-color: #fafafa;
-  min-width: 140px;
+  gap: 32px;
 }
 
-.statCardAprovado {
-  border-left: 4px solid #2E7D32;
-}
-
-.statCardPendente {
-  border-left: 4px solid #E65100;
-}
-
-.statValue {
-  font-size: 26px;
-  font-weight: 700;
-  color: #1a1a1a;
-}
-
-.statLabel {
-  font-size: 13px;
-  color: #75777A;
+.tabButton {
+  background: none;
+  border: none;
+  padding: 12px 0;
+  font-size: 15px;
   font-weight: 500;
+  color: #75777A;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
 }
 
-/* Busca */
-.searchWrapper {
-  position: relative;
-  margin-bottom: 20px;
-  max-width: 480px;
+.tabButton:hover {
+  color: #333;
+}
+
+.activeTab {
+  color: #7A2E44; /* Primária Vinho */
+  font-weight: 600;
+}
+
+.activeTab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #7A2E44;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+/* Filtros Wrapper (Barra de Pesquisa + Data) */
+.filtersWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+/* Barra de Pesquisa */
+.searchContainer {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  width: 320px;
+  transition: border-color 0.2s;
+}
+
+.searchContainer:focus-within {
+  border-color: #7A2E44;
 }
 
 .searchIcon {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
   color: #75777A;
+  margin-right: 12px;
 }
 
 .searchInput {
+  border: none;
+  outline: none;
+  background: transparent;
   width: 100%;
-  padding: 11px 16px 11px 42px;
-  border: 1px solid #D9D9D9;
-  border-radius: 8px;
   font-size: 14px;
-  font-family: inherit;
+  color: #333;
+}
+
+/* Filtro de Data */
+.dateFilterContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espaçamento entre o calendário e o botão X */
+}
+
+.dateInput {
+  background-color: #ffffff;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
   color: #333;
   outline: none;
   transition: border-color 0.2s;
-  background-color: #fff;
+  cursor: pointer;
 }
 
-.searchInput:focus {
-  border-color: #74213C;
+.dateInput:focus {
+  border-color: #7A2E44;
 }
 
-/* Wrapper da Tabela (scroll horizontal em telas menores) */
-.tableWrapper {
-  border: 1px solid #E5E5E5;
-  border-radius: 10px;
-  overflow: hidden;
-  overflow-x: auto;
-}
-
-/* Estados de loading/vazio */
-.loadingState,
-.emptyState {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 60px 20px;
-  color: #75777A;
-  font-size: 14px;
-}
-
-.spinner {
-  width: 22px;
-  height: 22px;
-  border: 3px solid #E5E5E5;
-  border-top-color: #74213C;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Tabela */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
-
-.th {
-  padding: 13px 16px;
-  text-align: left;
-  font-weight: 600;
-  font-size: 13px;
-  color: #555;
-  background-color: #F7F7F7;
-  border-bottom: 1px solid #E5E5E5;
-  white-space: nowrap;
-  user-select: none;
-}
-
-.sortable {
+.clearDateBtn {
+  background-color: #FFF0F0;
+  border: 1px solid #FFCDD2;
+  border-radius: 8px;
+  color: #D32F2F;
   cursor: pointer;
   display: flex;
   align-items: center;
-  /* NOTE: th com display flex precisa de workaround — usaremos gap normal */
-  gap: 6px;
+  justify-content: center;
+  padding: 10px;
+  transition: all 0.2s;
 }
 
-.sortable:hover {
-  color: #74213C;
+.clearDateBtn:hover {
+  background-color: #D32F2F;
+  color: #FFFFFF;
 }
 
-.sortIcon {
-  color: #BDBDBD;
-  flex-shrink: 0;
+/* Tabela */
+.tableWrapper {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #E5E5E5;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
 }
 
-.sortActive {
-  color: #74213C;
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.th {
+  background-color: #F8F9FA;
+  padding: 16px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #75777A;
+  border-bottom: 1px solid #E5E5E5;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .tr {
   border-bottom: 1px solid #F0F0F0;
-  transition: background-color 0.15s;
-}
-
-.tr:last-child {
-  border-bottom: none;
+  transition: background-color 0.2s;
 }
 
 .tr:hover {
-  background-color: #FDF7F8;
+  background-color: #FAFAFA;
 }
 
 .td {
-  padding: 14px 16px;
+  padding: 16px 20px;
+  font-size: 14px;
   color: #333;
   vertical-align: middle;
 }
 
-/* Botão favoritar */
-.favBtn {
+/* Estrela de Favorito */
+.starBtn {
   background: none;
   border: none;
   cursor: pointer;
-  color: #BDBDBD;
+  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
-  border-radius: 4px;
-  transition: color 0.2s;
+  transition: transform 0.1s;
 }
+.starBtn:active { transform: scale(0.9); }
 
-.favBtn:hover {
-  color: #74213C;
+/* Nome da Norma Clicável */
+.nomeNormaContainer {
+  cursor: pointer;
 }
-
-.favActive {
-  color: #74213C;
+.nomeNormaContainer:hover .tituloNorma {
+  color: #7A2E44;
 }
-
-/* Código */
-.codigo {
-  font-weight: 600;
-  color: #74213C;
-  font-size: 13px;
-  white-space: nowrap;
-}
-
-/* Título + órgão empilhados */
 .tituloNorma {
   display: block;
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  transition: color 0.2s;
+}
+.codigoNorma {
+  display: block;
+  font-size: 12px;
+  color: #75777A;
 }
 
-.orgaoSub {
-  display: none; /* Já temos coluna de órgão separada */
-}
-
-/* Badge tipo arquivo */
+/* Badges */
 .tipoBadge {
   display: inline-block;
-  padding: 3px 10px;
-  background-color: #F0F0F0;
+  padding: 4px 12px;
+  background-color: #FCE4EC;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
-  color: #555;
-  letter-spacing: 0.5px;
+  color: #C2185B;
 }
-
-/* Badges de status */
-.statusBadge {
+.tipoBadgeDisabled {
   display: inline-block;
   padding: 4px 12px;
+  background-color: #F5F5F5;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
-  white-space: nowrap;
+  color: #9E9E9E;
 }
 
-.statusAprovado {
-  background-color: #E8F5E9;
-  color: #2E7D32;
-}
-
-.statusPendente {
-  background-color: #FFF3E0;
-  color: #E65100;
-}
-
-.statusReprovado {
-  background-color: #FFEBEE;
-  color: #C62828;
-}
-
-/* Botão Visualizar */
-.visualizarBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background-color: #74213C;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  font-size: 13px;
+.statusBadge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
   font-weight: 600;
-  font-family: inherit;
+}
+.statusAprovado { background-color: #E8F5E9; color: #2E7D32; }
+.statusPendente { background-color: #FFF3E0; color: #E65100; }
+.statusReprovado { background-color: #FFEBEE; color: #C62828; }
+
+/* Botão Visualizar na Tabela */
+.visualizarBtn {
+  background: none;
+  border: none;
+  color: #75777A;
   cursor: pointer;
-  transition: filter 0.2s;
-  white-space: nowrap;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
 }
-
 .visualizarBtn:hover:not(:disabled) {
-  filter: brightness(0.88);
+  background-color: #F0F0F0;
+  color: #1a1a1a;
 }
-
 .visualizarBtn:disabled {
-  background-color: #D9D9D9;
-  color: #999;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
-/* Rodapé da tabela */
-.tableFooter {
-  margin-top: 14px;
+.loading {
+  padding: 40px;
+  text-align: center;
+  color: #75777A;
+}
+
+/* ========================================================= */
+/* MODAIS (DETALHES E PDF)                                   */
+/* ========================================================= */
+.modalOverlay, .modalOverlayPdf {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Modal Detalhes (Estilo Figma) */
+.modalContent {
+  background-color: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px 16px;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #75777A;
+  transition: color 0.2s;
+}
+.closeBtn:hover { color: #D32F2F; }
+
+.modalBody {
+  padding: 0 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modalHighlight {
+  background-color: #FAFAFA;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #E5E5E5;
+  margin-bottom: 8px;
+}
+
+.modalHighlight h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.modalHighlight p {
   font-size: 13px;
   color: #75777A;
-  text-align: right;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.iconCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #F8E8EC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailLabel {
+  display: block;
+  font-size: 12px;
+  color: #75777A;
+  margin-bottom: 2px;
+}
+
+.detailValue {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.viewPdfButtonLarge {
+  margin-top: 16px;
+  background-color: #7A2E44;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.2s;
+}
+
+.viewPdfButtonLarge:hover:not(:disabled) {
+  background-color: #5c2233;
+}
+
+.viewPdfButtonLarge:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Modal PDF Embutido */
+.pdfModalContent {
+  background-color: #333333;
+  width: 85vw;
+  height: 90vh;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.modalHeaderPdf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #222222;
+  color: white;
+}
+
+.modalTitlePdf {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.subtitlePdf {
+  font-size: 12px;
+  color: #AAAAAA;
+}
+
+.closeBtnPdf {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: opacity 0.2s;
+}
+
+.closeBtnPdf:hover { opacity: 0.7; }
+
+.pdfContainer {
+  flex: 1;
+  background-color: #525659; /* Cor de fundo padrão de leitores de PDF */
+  position: relative;
+}
+
+.pdfIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.pdfLoadingState {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
 }

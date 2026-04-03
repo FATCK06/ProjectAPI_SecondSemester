@@ -1,0 +1,191 @@
+.container {
+  padding: 36px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: #F8F9FA;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.addButton {
+  background-color: #7A2E44; 
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+  box-shadow: 0 4px 6px rgba(122, 46, 68, 0.15);
+}
+
+.addButton:hover { background-color: #5c2233; }
+
+.searchSection { margin-bottom: 24px; }
+
+/* NOVO: Organização dos Filtros Lado a Lado */
+.filtersWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  width: 420px; /* Mais espaço para o placeholder longo */
+}
+
+.filterRoleContainer {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  width: 240px;
+}
+
+.roleSelect {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  color: #333;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2375777A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 16px;
+  padding-right: 20px;
+}
+
+.searchIcon { color: #75777A; margin-right: 12px; }
+.searchInput { border: none; outline: none; width: 100%; font-size: 14px; }
+
+.tableWrapper {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #E5E5E5;
+  overflow: hidden;
+}
+
+.table { width: 100%; border-collapse: collapse; text-align: left; }
+.th { background-color: #F8F9FA; padding: 16px 24px; font-size: 13px; font-weight: 600; color: #75777A; border-bottom: 1px solid #E5E5E5; text-transform: uppercase; }
+.tr { border-bottom: 1px solid #F0F0F0; }
+.tr:hover { background-color: #FAFAFA; }
+.td { padding: 16px 24px; font-size: 14px; color: #333; vertical-align: middle; }
+
+.nomeCompleto { font-weight: 600; color: #1a1a1a; }
+
+.badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; text-align: center; }
+.badgeAdmin { background-color: #FCE4EC; color: #C2185B; }
+.badgeRevisor { background-color: #E3F2FD; color: #1565C0; }
+.badgeConsultor { background-color: #F5F5F5; color: #616161; }
+
+.actionsContainer { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.actionBtnEdit, .actionBtnDelete { background: none; border: none; color: #75777A; cursor: pointer; }
+.actionBtnEdit:hover { color: #1565C0; }
+.actionBtnDelete:hover { color: #D32F2F; }
+
+.loading { padding: 40px; text-align: center; color: #75777A; }
+
+/* ========================================================= */
+/* MODAL DE EDIÇÃO PREMIUM (Estilo Figma)                    */
+/* ========================================================= */
+.modalOverlay { 
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+  background-color: rgba(0,0,0,0.5); 
+  display: flex; align-items: center; justify-content: center; z-index: 1000; 
+  backdrop-filter: blur(2px);
+}
+.modalContent { 
+  background-color: #fff; border-radius: 16px; width: 100%; max-width: 650px; overflow: hidden; 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+.modalHeader { display: flex; justify-content: space-between; padding: 24px 32px; border-bottom: 1px solid #F0F0F0; }
+.modalTitle { font-size: 22px; font-weight: 700; color: #1a1a1a;}
+.closeBtn { background: none; border: none; cursor: pointer; color: #75777A; transition: color 0.2s; }
+.closeBtn:hover { color: #D32F2F; }
+
+/* Estrutura do Formulário do Modal */
+.formBody { padding: 32px; display: flex; flex-direction: column; gap: 24px; }
+.rowSplit { display: flex; gap: 24px; width: 100%; }
+.formGroup { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.formGroupFull { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; }
+.label { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+
+/* Inputs com Ícones */
+.inputWrapper { position: relative; display: flex; align-items: center; width: 100%; }
+.inputIcon { position: absolute; left: 16px; color: #75777A; pointer-events: none; }
+
+.input, .inputSelect { 
+  width: 100%; padding: 14px 16px 14px 44px; border: 1px solid #D9D9D9; border-radius: 8px; 
+  font-size: 14px; color: #333; outline: none; transition: border-color 0.2s; background-color: #ffffff; 
+}
+.inputPassword {
+  width: 100%; padding: 14px 44px 14px 44px; border: 1px solid #D9D9D9; border-radius: 8px; 
+  font-size: 14px; color: #333; outline: none; transition: border-color 0.2s; background-color: #ffffff; 
+}
+
+.inputSelect {
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2375777A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat; background-position: right 16px center; background-size: 16px; cursor: pointer;
+}
+
+.input:focus, .inputPassword:focus, .inputSelect:focus { border-color: #7A2E44; box-shadow: 0 0 0 2px rgba(122, 46, 68, 0.1); }
+
+/* NOVO: Erros */
+.inputError {
+  border-color: #D32F2F !important;
+}
+
+.errorText {
+  color: #D32F2F;
+  font-size: 12px;
+  margin-top: -4px;
+}
+
+/* Olho da Senha */
+.eyeBtn {
+  position: absolute; right: 16px; background: none; border: none; color: #75777A; 
+  cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: color 0.2s;
+}
+.eyeBtn:hover { color: #1a1a1a; }
+
+/* Botões do Rodapé do Modal */
+.modalFooter { display: flex; justify-content: flex-end; gap: 16px; margin-top: 8px; }
+.cancelBtn { 
+  background-color: #ffffff; color: #75777A; border: 1px solid #D9D9D9; padding: 12px 24px; 
+  border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s; 
+}
+.cancelBtn:hover { background-color: #F5F5F5; color: #333; }
+.saveBtn { 
+  background-color: #7A2E44; color: #ffffff; border: none; padding: 12px 24px; 
+  border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: background-color 0.2s; 
+}
+.saveBtn:hover:not(:disabled) { background-color: #5c2233; }

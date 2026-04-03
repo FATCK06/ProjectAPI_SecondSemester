@@ -167,7 +167,10 @@ export default function CadastrarNorma() {
           revisao_norma_obsoleta: revisaoObsoleta,
           id_orgao: Number(idOrgaoSelecionado),
           status_norma: 0,
-          caminho_arquivo: filePath // Salvando o caminho do arquivo (Opção A)
+          caminho_arquivo: filePath, // Salvando o caminho do arquivo (Opção A)
+          id_categoria: idCategoriaSelecionada ? parseInt(idCategoriaSelecionada) : null,
+          id_subcategoria: idSubCategoriaSelecionada ? parseInt(idSubCategoriaSelecionada) : null,
+          id_tipo: idTipoSelecionado ? parseInt(idTipoSelecionado) : null,
         })
         .select()
         .single(); 
