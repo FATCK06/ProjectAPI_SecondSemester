@@ -37,9 +37,9 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  1   |   Alta   | Como supervisor, quero cadastrar as normas, para que elas fiquem centralizadas e organizadas.               |     6      |   1    |    ⏳   |     
-|  2   |    Alta    | Como consultor, quero visualizar normas cadastradas na plataforma, para analisar os requisitos normativos.                                          |    5     |   1   |     ⏳  |     
-|  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.                                                                                      |     6      |   1   |    ⏳   |     
+|  1   |   Alta   | Como supervisor, quero cadastrar as normas, para que elas fiquem centralizadas e organizadas.               |     6      |   1    |    ✅   |     
+|  2   |    Alta    | Como consultor, quero visualizar normas cadastradas na plataforma, para analisar os requisitos normativos.                                          |    5     |   1   |     ✅  |     
+|  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.                                                                                      |     6      |   1   |    ✅   |     
 |  4   |    Alta    | Como consultor, quero filtrar normas por órgão, categoria ou palavra-chave, para localizar informações rapidamente.                                          |    5     |   2    |    ⏳  |     
 |  5   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.                                                                                            |     5      |   2   |    ⏳  |     
 |  6   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ⏳  |    
@@ -59,9 +59,9 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  1   |   Alta   | Como supervisor, quero cadastrar as normas, para que elas fiquem centralizadas e organizadas.               |     6      |   1    |    ⏳   |     
-|  2   |    Alta    | Como consultor, quero visualizar normas cadastradas na plataforma, para analisar os requisitos normativos.                                          |    5     |   1   |     ⏳  |     
-|  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.                                                                                      |     6      |   1   |    ⏳   |     
+|  1   |   Alta   | Como supervisor, quero cadastrar as normas, para que elas fiquem centralizadas e organizadas.               |     6      |   1    |    ✅   |     
+|  2   |    Alta    | Como consultor, quero visualizar normas cadastradas na plataforma, para analisar os requisitos normativos.                                          |    5     |   1   |     ✅  |     
+|  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.                                                                                      |     6      |   1   |    ✅   |     
 
 </details>
 
@@ -121,7 +121,7 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 | Sprint          |    Período    | Documentação                                     | Status |
 | --------------- | :-----------: | ------------------------------------------------ | ----- |
-|  **SPRINT 1** | 16/03 - 05/04 | [Sprint1](docs/sprints/sprint1.md) | Em andamento ⏳ |
+|  **SPRINT 1** | 16/03 - 05/04 | [Sprint1](docs/sprints/sprint1.md) | Concluído ✅ |
 |  **SPRINT 2** | 13/04 - 03/05 | [Sprint2](docs/sprints/sprint2.md) | Não iniciado ❌ |
 |  **SPRINT 3** | 11/05 - 31/05 | [Sprint3](docs/sprints/sprint3.md) | Não iniciado ❌ |
 
@@ -129,12 +129,18 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 ## 🎥 Mídia <a id="midia"></a>
 
+
 ## Protótipo do Figma
 
+<div>
+  <a href="https://youtu.be/fxB6eTjgZxs?si=zNMAKQDaGHRZZ2NU">Clique aqui para ver o nosso protótipo do figma!</a>
+</div>
 
 ## Site Sprint 1
 
-
+<div>
+  <a href="https://youtu.be/ZfeW5FDXJu8?si=QwjEGQNgyN8eepiY">Clique aqui e veja a primeira versão do nosso site!</a>
+</div>
 
 ---
 
