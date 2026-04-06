@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Eye, Star, Search, X, FileText, User, Calendar } from "lucide-react";
+import { Eye, Star, Search, X, FileText, User, Calendar, CheckCircle, Archive } from "lucide-react";
 import { supabase } from "@/services/supabase";
 import styles from "./home.module.css";
 
-// Mantendo a Interface dentro do arquivo, como pedido!
 interface Norma {
   id_norma: number;
   codigo_norma: string;
@@ -269,6 +268,23 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* REVISÕES ADICIONADAS */}
+              <div className={styles.detailRow}>
+                <div className={styles.iconCircle}><CheckCircle size={20} color="#7A2E44" /></div>
+                <div>
+                  <span className={styles.detailLabel}>Revisão Atual</span>
+                  <span className={styles.detailValue}>{selectedNorma.revisao_norma_atual || "—"}</span>
+                </div>
+              </div>
+
+              <div className={styles.detailRow}>
+                <div className={styles.iconCircle}><Archive size={20} color="#7A2E44" /></div>
+                <div>
+                  <span className={styles.detailLabel}>Revisão Obsoleta</span>
+                  <span className={styles.detailValue}>{selectedNorma.revisao_norma_obsoleta || "—"}</span>
+                </div>
+              </div>
+
               <div className={styles.detailRow}>
                 <div className={styles.iconCircle}><FileText size={20} color="#7A2E44" /></div>
                 <div>
@@ -296,7 +312,11 @@ export default function Home() {
               <button className={styles.closeBtnPdf} onClick={closeModals}><X size={24} color="#fff" /></button>
             </div>
             <div className={styles.pdfContainer}>
-              {isPdfLoading ? <div className={styles.pdfLoadingState}>Gerando visualização segura...</div> : <iframe src={pdfUrl} className={styles.pdfIframe} />}
+              {isPdfLoading || !pdfUrl ? (
+                <div style={{ color: "#fff", padding: "40px", textAlign: "center" }}>Gerando visualização segura...</div>
+              ) : (
+                <iframe src={pdfUrl} className={styles.pdfIframe} />
+              )}
             </div>
           </div>
         </div>

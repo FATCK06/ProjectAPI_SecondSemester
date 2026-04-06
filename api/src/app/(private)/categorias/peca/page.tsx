@@ -1,16 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Eye, Star, Search, X, FileText, User, Calendar } from "lucide-react";
+import { Eye, Star, Search, X, FileText, User, Calendar, CheckCircle, Archive } from "lucide-react";
 import { supabase } from "@/services/supabase";
 import styles from "./peca.module.css";
 
-// Interface local
 interface Norma {
   id_norma: number;
   codigo_norma: string;
   titulo_norma: string;
   data_publicacao_norma: string | null;
+  revisao_norma_atual: string;
+  revisao_norma_obsoleta: string;
   caminho_arquivo: string | null;
   id_categoria: number;
   tb_orgaos?: { nome_completo_orgao: string; sigla_orgao: string } | any;
@@ -18,7 +19,6 @@ interface Norma {
   tb_tipo?: { nome_tipo: string } | any;
 }
 
-// Funções de tratamento de dados (Pesquisa Inteligente)
 const normalizeText = (text: string | null | undefined) => {
   if (!text) return "";
   return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -55,7 +55,7 @@ export default function NormasPeca() {
   const [selectedNorma, setSelectedNorma] = useState<Norma | null>(null);
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
   const [pdfUrl, setPdfUrl] = useState<string>("");
-  const [isPdfLoading, setIsPdfLoading] = useState(false); // FIX: Estado de Loading do PDF
+  const [isPdfLoading, setIsPdfLoading] = useState(false);
 
   useEffect(() => {
     const storedFavs = localStorage.getItem('@normas_favoritas');
@@ -103,7 +103,6 @@ export default function NormasPeca() {
     localStorage.setItem('@normas_favoritas', JSON.stringify(newF));
   };
 
-  // FIX: Prevenindo o Erro de Iframe com o Loading State
   const handleOpenPdf = async (caminho: string | null) => {
     if (!caminho) return;
     setIsPdfLoading(true);
@@ -113,11 +112,7 @@ export default function NormasPeca() {
     setIsPdfLoading(false);
   };
 
-  const closeModals = () => { 
-    setSelectedNorma(null); 
-    setIsPdfModalOpen(false); 
-    setPdfUrl(""); 
-  };
+  const closeModals = () => { setSelectedNorma(null); setIsPdfModalOpen(false); setPdfUrl(""); };
 
   let filtered = normas.filter(n => {
     const term = normalizeText(searchTerm);
@@ -205,7 +200,6 @@ export default function NormasPeca() {
         )}
       </div>
 
-      {/* FIX: Modal de Detalhes com "Nome do Arquivo" restaurado */}
       {selectedNorma && !isPdfModalOpen && (
         <div className={styles.modalOverlay} onClick={closeModals}>
           <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
@@ -213,17 +207,19 @@ export default function NormasPeca() {
             <div className={styles.modalBody}>
               <div className={styles.modalHighlight}><h3>{selectedNorma.titulo_norma}</h3><p>{selectedNorma.codigo_norma}</p></div>
               
-              <div className={styles.detailRow}>
-                <div className={styles.iconCircle}><User size={20} color="#7A2E44" /></div>
-                <div><span className={styles.detailLabel}>Revisor Responsável</span><span className={styles.detailValue}>{revisorNome}</span></div>
-              </div>
+              <div className={styles.detailRow}><div className={styles.iconCircle}><User size={20} color="#7A2E44" /></div><div><span className={styles.detailLabel}>Revisor Responsável</span><span className={styles.detailValue}>{revisorNome}</span></div></div>
+              <div className={styles.detailRow}><div className={styles.iconCircle}><Calendar size={20} color="#7A2E44" /></div><div><span className={styles.detailLabel}>Data de Lançamento</span><span className={styles.detailValue}>{formatarDataSegura(selectedNorma.data_publicacao_norma)}</span></div></div>
               
               <div className={styles.detailRow}>
-                <div className={styles.iconCircle}><Calendar size={20} color="#7A2E44" /></div>
-                <div><span className={styles.detailLabel}>Data de Lançamento</span><span className={styles.detailValue}>{formatarDataSegura(selectedNorma.data_publicacao_norma)}</span></div>
+                <div className={styles.iconCircle}><CheckCircle size={20} color="#7A2E44" /></div>
+                <div><span className={styles.detailLabel}>Revisão Atual</span><span className={styles.detailValue}>{selectedNorma.revisao_norma_atual || "—"}</span></div>
               </div>
 
-              {/* Linha do Arquivo que estava faltando! */}
+              <div className={styles.detailRow}>
+                <div className={styles.iconCircle}><Archive size={20} color="#7A2E44" /></div>
+                <div><span className={styles.detailLabel}>Revisão Obsoleta</span><span className={styles.detailValue}>{selectedNorma.revisao_norma_obsoleta || "—"}</span></div>
+              </div>
+
               <div className={styles.detailRow}>
                 <div className={styles.iconCircle}><FileText size={20} color="#7A2E44" /></div>
                 <div>
@@ -238,7 +234,6 @@ export default function NormasPeca() {
         </div>
       )}
       
-      {/* FIX: Modal de PDF blindado contra empty src */}
       {isPdfModalOpen && (
         <div className={styles.modalOverlayPdf} onClick={closeModals}>
           <div className={styles.pdfModalContent} onClick={e => e.stopPropagation()}>

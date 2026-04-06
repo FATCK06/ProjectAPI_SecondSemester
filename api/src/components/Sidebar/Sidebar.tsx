@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
     Home,
@@ -21,15 +21,90 @@ import {
     BookMarked
 } from "lucide-react";
 import styles from "./Sidebar.module.css";
+import { supabase } from "@/services/supabase";
 
 export default function Sidebar() {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [isCategoriasOpen, setIsCategoriasOpen] = useState(false);
+    
+    // Estados para os dados do usuário
+    const [userName, setUserName] = useState("Carregando...");
+    const [userRole, setUserRole] = useState("");
 
     const pathname = usePathname();
+    const router = useRouter();
+
+    // Busca o usuário logado de forma reativa e à prova de falhas para a apresentação
+    useEffect(() => {
+        async function fetchUser() {
+            try {
+                // 1. Tenta buscar da sessão atual do Supabase
+                const { data: { user } } = await supabase.auth.getUser();
+                
+                let query = supabase.from("tb_usuarios").select("nome_usuario, sobrenome_usuario, permissao_usuario");
+                let shouldFetch = false;
+
+                // 2. Se houver e-mail na sessão oficial, busca por ele
+                if (user && user.email) {
+                    query = query.ilike("email_usuario", user.email);
+                    shouldFetch = true;
+                } 
+                // 3. Como vocês usam o login apenas por "Nome", buscamos pelo localStorage
+                else if (typeof window !== "undefined") {
+                    const localUsername = localStorage.getItem("nome_usuario");
+                    if (localUsername) {
+                        query = query.ilike("nome_usuario", localUsername);
+                        shouldFetch = true;
+                    }
+                }
+
+                // 4. Executa a busca EXATA (sem puxar ninguém aleatório!)
+                if (shouldFetch) {
+                    const { data } = await query.maybeSingle();
+
+                    if (data) {
+                        setUserName(`${data.nome_usuario} ${data.sobrenome_usuario || ''}`.trim());
+                        setUserRole(
+                            data.permissao_usuario === "ADMIN" ? "Administrador" : 
+                            data.permissao_usuario === "REVISOR" ? "Revisor" : "Consultor"
+                        );
+                    } else {
+                        setUserName("Usuário não encontrado");
+                        setUserRole("");
+                    }
+                } else {
+                    setUserName("Usuário");
+                    setUserRole("");
+                }
+            } catch (error) {
+                console.error("Erro ao buscar usuário:", error);
+            }
+        }
+
+        // Verifica a sessão atual ao montar a Sidebar
+        fetchUser();
+
+        // Escuta mudanças na autenticação (atualiza na hora quando faz login/logout)
+        const { data: authListener } = supabase.auth.onAuthStateChange(() => {
+            fetchUser();
+        });
+
+        return () => {
+            authListener.subscription.unsubscribe();
+        };
+    }, []);
 
     const toggleSidebar = () => {
         setIsCollapsed(!isCollapsed);
+    }
+
+    // Função de Logout (Limpando a sessão do Supabase e o Cache local)
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        if (typeof window !== "undefined") {
+            localStorage.removeItem("nome_usuario"); 
+        }
+        router.push("/login"); // Redireciona e reseta a página
     }
 
     return (
@@ -123,18 +198,17 @@ export default function Sidebar() {
                     {!isCollapsed && (
                         <>
                             <div className={styles.userInfo}>
-                                <span className={styles.userName}>Neymar Martins</span>
-                                <span className={styles.userRole}>Administrador</span>
+                                <span className={styles.userName}>{userName}</span>
+                                <span className={styles.userRole}>{userRole}</span>
                             </div>
 
-                            <button className={styles.logoutBtn} title="Sair do sistema">
+                            <button className={styles.logoutBtn} onClick={handleLogout} title="Sair do sistema">
                                 <LogOut size={20} color="#000000" />
                             </button>
                         </>
                     )}
                 </div>
 
-            {/* 3. CORRIGIDO: A </div> extra que estava aqui foi removida! */}
             </div>
 
         </aside>

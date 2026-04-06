@@ -29,6 +29,11 @@ export default function LoginPage() {
             return;
         }
         
+        // NOVO: Guarda o nome do usuário no navegador para a Sidebar ler!
+        if (typeof window !== "undefined") {
+            localStorage.setItem("nome_usuario", nomeUsuario);
+        }
+        
         router.push("/home");
     };
 
