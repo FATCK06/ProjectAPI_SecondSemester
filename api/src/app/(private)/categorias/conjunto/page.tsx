@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Eye, Star, Search, X, FileText, User, Calendar } from "lucide-react";
+import { Eye, Star, Search, X, FileText, User, Calendar, CheckCircle, Archive } from "lucide-react";
 import { supabase } from "@/services/supabase";
 import styles from "./conjunto.module.css";
 
@@ -10,6 +10,8 @@ interface Norma {
   codigo_norma: string;
   titulo_norma: string;
   data_publicacao_norma: string | null;
+  revisao_norma_atual: string;
+  revisao_norma_obsoleta: string;
   caminho_arquivo: string | null;
   id_categoria: number;
   tb_orgaos?: { nome_completo_orgao: string; sigla_orgao: string } | any;
@@ -208,7 +210,16 @@ export default function NormasConjunto() {
               <div className={styles.detailRow}><div className={styles.iconCircle}><User size={20} color="#7A2E44" /></div><div><span className={styles.detailLabel}>Revisor Responsável</span><span className={styles.detailValue}>{revisorNome}</span></div></div>
               <div className={styles.detailRow}><div className={styles.iconCircle}><Calendar size={20} color="#7A2E44" /></div><div><span className={styles.detailLabel}>Data de Lançamento</span><span className={styles.detailValue}>{formatarDataSegura(selectedNorma.data_publicacao_norma)}</span></div></div>
               
-              {/* Arquivo Adicionado! */}
+              <div className={styles.detailRow}>
+                <div className={styles.iconCircle}><CheckCircle size={20} color="#7A2E44" /></div>
+                <div><span className={styles.detailLabel}>Revisão Atual</span><span className={styles.detailValue}>{selectedNorma.revisao_norma_atual || "—"}</span></div>
+              </div>
+
+              <div className={styles.detailRow}>
+                <div className={styles.iconCircle}><Archive size={20} color="#7A2E44" /></div>
+                <div><span className={styles.detailLabel}>Revisão Obsoleta</span><span className={styles.detailValue}>{selectedNorma.revisao_norma_obsoleta || "—"}</span></div>
+              </div>
+
               <div className={styles.detailRow}>
                 <div className={styles.iconCircle}><FileText size={20} color="#7A2E44" /></div>
                 <div>
