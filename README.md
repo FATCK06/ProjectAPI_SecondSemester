@@ -111,7 +111,7 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 | Título                            | Definição                                                                                     |
 | ------------------------------------ | --------------------------------------------------------------------------------------------- |
-| Versionamento          | O código está versionado, revisado e sem falhas críticas        |
+| Versionamento          | O código está versionado, revisado e sem falhas críticas.        |
 | Critérios de aceitação | Todos os critérios de aceitação foram validados. |
 | Responsividade  |       A aplicação é responsiva e acessível em desktop e mobile.           |
 | Testes  |      Testes manuais confirmam o funcionamento das funcionalidades.          |
