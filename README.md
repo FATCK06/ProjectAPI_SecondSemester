@@ -204,7 +204,14 @@ Adotamos um fluxo baseado em **GitFlow**:
 | Tipo | Uso |
 |------|-----|
 | `main` | Código estável |
-| `development` | Código em desenvolvimento |
+| `fix/sidebar` | Modificações na sidebar |
+| `feat/home` | Home Page do site |
+| `feat/VinculacaoComBancoESalvamentoDeArquivos` | Vinculação do Banco de Dados |
+| `Prototype1` | Protótipo inicial do site |
+| `feat/pagina-login` | Front-End da página de login |
+| `feature/inserindo_banco` | Inserção do banco de dados |
+| `reorganize-folder-structure` | Organização da documentação |
+| `test-readme.md` | Modificação do README |
 
 
 ---
@@ -213,7 +220,7 @@ Adotamos um fluxo baseado em **GitFlow**:
 
 Adotamos um padrão para manter o histórico legível e rastreável.
 
-**Formato:** `tipo/mensagem`
+**Formato:** `<tipo>(#00):mensagem`
 
 | Tipo       | Descrição                                |
 | :--------- | :--------------------------------------- |
