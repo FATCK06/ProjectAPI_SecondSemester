@@ -38,13 +38,15 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
 |  1   |   Alta   | Como supervisor, quero cadastrar as normas, para que elas fiquem centralizadas e organizadas.               |     6      |   1    |    ✅   |     
-|  2   |    Alta    | Como consultor, quero visualizar normas cadastradas na plataforma, para analisar os requisitos normativos.                                          |    5     |   1   |     ✅  |     
-|  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.                                                                                      |     6      |   1   |    ✅   |     
-|  4   |    Alta    | Como consultor, quero filtrar normas por órgão, categoria ou palavra-chave, para localizar informações rapidamente.                                          |    5     |   2    |    ⏳  |     
-|  5   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.                                                                                            |     5      |   2   |    ⏳  |     
-|  6   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ⏳  |    
-|  7   |    Média    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   3    |    ⏳  | 
-|  8   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
+|  2   |    Alta    | Como consultor, quero visualizar normas cadastradas na plataforma, para analisar os requisitos normativos.          |    5     |   1   |     ✅  |     
+|  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.          |     6      |   1   |    ✅   |     
+|  4   |    Alta    | Como consultor, quero filtrar normas por órgão, categoria ou palavra-chave, para localizar informações rapidamente.                                          |    5     |  1    |    ✅  |  
+|  5   |    Alta    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   1    |    ✅  | 
+|  6   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.              |     5      |   2   |    ⏳  |     
+|  7   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ⏳  |  
+|  8   |    Alta    | Como consultor, quero visualizar as versões de um item e suas normas correlacionadas na tela de detalhes, para ter acesso completo às informações necessárias para análise.                                          |    6    |   2    |    ⏳  |   
+|  9   |    Média    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   3    |    ⏳  | 
+|  10   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
 
 
 ---
@@ -60,8 +62,10 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
 |  1   |   Alta   | Como supervisor, quero cadastrar as normas, para que elas fiquem centralizadas e organizadas.               |     6      |   1    |    ✅   |     
-|  2   |    Alta    | Como consultor, quero visualizar normas cadastradas na plataforma, para analisar os requisitos normativos.                                          |    5     |   1   |     ✅  |     
-|  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.                                                                                      |     6      |   1   |    ✅   |     
+|  2   |    Alta    | Como consultor, quero visualizar normas cadastradas na plataforma, para analisar os requisitos normativos.          |    5     |   1   |     ✅  |     
+|  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.          |     6      |   1   |    ✅   |     
+|  4   |    Alta    | Como consultor, quero filtrar normas por órgão, categoria ou palavra-chave, para localizar informações rapidamente.                                          |    5     |  1    |    ✅  |  
+|  5   |    Alta    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   1    |    ✅  |  
 
 </details>
 
@@ -72,9 +76,9 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  4   |    Alta    | Como consultor, quero filtrar normas por órgão, categoria ou palavra-chave, para localizar informações rapidamente.                                          |    5     |   2    |    ⏳  |     
-|  5   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.                                                                                            |     5      |   2   |    ⏳  |     
-|  6   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas                                         |    8      |   2    |    ⏳  |    
+|  6   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.              |     5      |   2   |    ⏳  |     
+|  7   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ⏳  |  
+|  8   |    Alta    | Como consultor, quero visualizar as versões de um item e suas normas correlacionadas na tela de detalhes, para ter acesso completo às informações necessárias para análise.                                          |    6    |   2    |    ⏳  |   
 
 </details>
 
@@ -85,8 +89,9 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  7   |    Média    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   3    |    ⏳  | 
-|  8   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
+|  9   |    Média    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   3    |    ⏳  | 
+|  10   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
+
 
 </details>
 
@@ -125,8 +130,8 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 | Sprint          |    Período    | Documentação                                     | Status |
 | --------------- | :-----------: | ------------------------------------------------ | ----- |
-|  **SPRINT 1** | 16/03 - 05/04 | [Sprint1](docs/sprints/sprint1.md) | Concluído ✅ |
-|  **SPRINT 2** | 13/04 - 03/05 | [Sprint2](docs/sprints/sprint2.md) | Não iniciado ❌ |
+|  **SPRINT 1** | 16/03 - 05/04 | [Sprint1](docs/sprints/sprint1.md) | Concluído ✅    |
+|  **SPRINT 2** | 13/04 - 03/05 | [Sprint2](docs/sprints/sprint2.md) | Em andamento ⏳ |
 |  **SPRINT 3** | 11/05 - 31/05 | [Sprint3](docs/sprints/sprint3.md) | Não iniciado ❌ |
 
 ---
@@ -212,7 +217,8 @@ Adotamos um fluxo baseado em **GitFlow**:
 | `feature/inserindo_banco` | Inserção do banco de dados |
 | `reorganize-folder-structure` | Organização da documentação |
 | `test-readme.md` | Modificação do README |
-
+| `docs/updateDocumentos` | Atualização dos documentos |
+| `docs/updateREADME` | Atualização do README |
 
 ---
 
