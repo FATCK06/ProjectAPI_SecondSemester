@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Eye, Star, Search, X, FileText, User, Calendar, CheckCircle, Archive } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Eye, Star, Search, X, FileText, User, Calendar, CheckCircle, Archive, Link2 } from "lucide-react";
 import { supabase } from "@/services/supabase";
 import styles from "./home.module.css";
 
@@ -25,7 +25,7 @@ const normalizeText = (text: string | null | undefined) => {
 
 const formatarDataSegura = (dataString: string | null) => {
   if (!dataString) return "";
-  if (dataString.includes('/')) return dataString; 
+  if (dataString.includes('/')) return dataString;
   const ymd = dataString.split('T')[0];
   const parts = ymd.split('-');
   if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
@@ -45,11 +45,11 @@ export default function Home() {
   const [normas, setNormas] = useState<Norma[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [revisorNome, setRevisorNome] = useState("Não atribuído");
-  
+
   const [activeTab, setActiveTab] = useState<"todas" | "recentes" | "favoritas">("todas");
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchDate, setSearchDate] = useState(""); 
-  
+  const [searchDate, setSearchDate] = useState("");
+
   const [favoritas, setFavoritas] = useState<number[]>([]);
   const [recentes, setRecentes] = useState<number[]>([]);
 
@@ -57,6 +57,12 @@ export default function Home() {
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
   const [pdfUrl, setPdfUrl] = useState<string>("");
   const [isPdfLoading, setIsPdfLoading] = useState(false);
+
+  // ── Correlação ──
+  const [correlacaoSearch, setCorrelacaoSearch] = useState("");
+  const [correlacaoAberta, setCorrelacaoAberta] = useState(false);
+  const [normaCorrelacionada, setNormaCorrelacionada] = useState<Norma | null>(null);
+  const correlacaoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const storedFavs = localStorage.getItem('@normas_favoritas');
@@ -79,12 +85,23 @@ export default function Home() {
         .eq("permissao_usuario", "REVISOR")
         .limit(1)
         .single();
-      
+
       if (revisorData) setRevisorNome(`${revisorData.nome_usuario} ${revisorData.sobrenome_usuario || ""}`.trim());
 
       setIsLoading(false);
     }
     fetchData();
+  }, []);
+
+  // Fecha dropdown de correlação ao clicar fora
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (correlacaoRef.current && !correlacaoRef.current.contains(e.target as Node)) {
+        setCorrelacaoAberta(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const getOrgaoNome = (orgaoData: Norma['tb_orgaos']) => {
@@ -101,6 +118,8 @@ export default function Home() {
 
   const handleOpenDetails = (norma: Norma) => {
     setSelectedNorma(norma);
+    setNormaCorrelacionada(null);
+    setCorrelacaoSearch("");
     setRecentes((prev) => {
       if (!prev.includes(norma.id_norma)) {
         const newRecentes = [norma.id_norma, ...prev];
@@ -133,7 +152,17 @@ export default function Home() {
     setSelectedNorma(null);
     setIsPdfModalOpen(false);
     setPdfUrl("");
+    setNormaCorrelacionada(null);
+    setCorrelacaoSearch("");
   };
+
+  // Normas disponíveis para correlação (exclui a norma atual aberta)
+  const normasParaCorrelacao = normas.filter(
+    (n) => n.id_norma !== selectedNorma?.id_norma &&
+      (correlacaoSearch === "" ||
+        normalizeText(n.titulo_norma).includes(normalizeText(correlacaoSearch)) ||
+        normalizeText(n.codigo_norma).includes(normalizeText(correlacaoSearch)))
+  );
 
   let filteredNormas = normas.filter((norma) => {
     const term = normalizeText(searchTerm);
@@ -141,7 +170,7 @@ export default function Home() {
     const orgaoSigla = normalizeText(getOrgaoSigla(norma.tb_orgaos));
     const dataFormatada = formatarDataSegura(norma.data_publicacao_norma);
 
-    const matchesSearchTerm = 
+    const matchesSearchTerm =
       normalizeText(norma.titulo_norma).includes(term) ||
       normalizeText(norma.codigo_norma).includes(term) ||
       orgaoNome.includes(term) || orgaoSigla.includes(term) ||
@@ -177,7 +206,7 @@ export default function Home() {
             <Search size={18} className={styles.searchIcon} />
             <input type="text" placeholder="Pesquisar norma, órgão ou sigla..." className={styles.searchInput} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </div>
-          
+
           <div className={styles.dateFilterContainer}>
             <input type="date" className={styles.dateInput} value={searchDate} onChange={(e) => setSearchDate(e.target.value)} />
             {searchDate && <button className={styles.clearDateBtn} onClick={() => setSearchDate("")}><X size={16} /></button>}
@@ -238,6 +267,7 @@ export default function Home() {
         )}
       </div>
 
+      {/* ── Modal Detalhes ── */}
       {selectedNorma && !isPdfModalOpen && (
         <div className={styles.modalOverlay} onClick={closeModals}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
@@ -245,7 +275,7 @@ export default function Home() {
               <h2 className={styles.modalTitle}>Detalhes da Norma</h2>
               <button className={styles.closeBtn} onClick={closeModals}><X size={24} /></button>
             </div>
-            
+
             <div className={styles.modalBody}>
               <div className={styles.modalHighlight}>
                 <h3>{selectedNorma.titulo_norma}</h3>
@@ -259,7 +289,7 @@ export default function Home() {
                   <span className={styles.detailValue}>{revisorNome}</span>
                 </div>
               </div>
-              
+
               <div className={styles.detailRow}>
                 <div className={styles.iconCircle}><Calendar size={20} color="#7A2E44" /></div>
                 <div>
@@ -268,7 +298,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* REVISÕES ADICIONADAS */}
               <div className={styles.detailRow}>
                 <div className={styles.iconCircle}><CheckCircle size={20} color="#7A2E44" /></div>
                 <div>
@@ -293,7 +322,65 @@ export default function Home() {
                 </div>
               </div>
 
-              <button className={styles.viewPdfButtonLarge} onClick={() => handleOpenPdf(selectedNorma.caminho_arquivo)} disabled={!selectedNorma.caminho_arquivo}>
+              {/* ── Campo Correlacionar Norma ── */}
+              <div className={styles.correlacaoSection}>
+                <label className={styles.correlacaoLabel}>
+                  <Link2 size={14} /> Correlacionar com outra norma
+                </label>
+                <div className={styles.correlacaoWrapper} ref={correlacaoRef}>
+                  <div className={styles.correlacaoInputWrapper}>
+                    <Search size={15} className={styles.correlacaoSearchIcon} />
+                    <input
+                      type="text"
+                      className={styles.correlacaoInput}
+                      placeholder="Buscar norma pelo título ou código..."
+                      value={correlacaoSearch}
+                      onChange={(e) => setCorrelacaoSearch(e.target.value)}
+                      onFocus={() => setCorrelacaoAberta(true)}
+                    />
+                  </div>
+
+                  {correlacaoAberta && (
+                    <ul className={styles.correlacaoDropdown}>
+                      {normasParaCorrelacao.length === 0 ? (
+                        <li className={styles.correlacaoSemResultado}>Nenhuma norma encontrada</li>
+                      ) : (
+                        normasParaCorrelacao.map((norma) => (
+                          <li
+                            key={norma.id_norma}
+                            className={`${styles.correlacaoItem} ${normaCorrelacionada?.id_norma === norma.id_norma ? styles.correlacaoItemSelecionado : ""}`}
+                            onClick={() => {
+                              setNormaCorrelacionada(norma);
+                              setCorrelacaoSearch("");
+                              setCorrelacaoAberta(false);
+                            }}
+                          >
+                            <span className={styles.correlacaoItemTitulo}>{norma.titulo_norma}</span>
+                            <span className={styles.correlacaoItemCodigo}>{norma.codigo_norma}</span>
+                          </li>
+                        ))
+                      )}
+                    </ul>
+                  )}
+                </div>
+
+                {/* Tag da norma correlacionada */}
+                {normaCorrelacionada && (
+                  <div className={styles.correlacaoTag}>
+                    <Link2 size={12} />
+                    <span>{normaCorrelacionada.titulo_norma}</span>
+                    <button onClick={() => setNormaCorrelacionada(null)}>
+                      <X size={13} />
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              <button
+                className={styles.viewPdfButtonLarge}
+                onClick={() => handleOpenPdf(selectedNorma.caminho_arquivo)}
+                disabled={!selectedNorma.caminho_arquivo}
+              >
                 <Eye size={20} /> Visualizar PDF
               </button>
             </div>
@@ -301,6 +388,7 @@ export default function Home() {
         </div>
       )}
 
+      {/* ── Modal PDF ── */}
       {isPdfModalOpen && (
         <div className={styles.modalOverlayPdf} onClick={closeModals}>
           <div className={styles.pdfModalContent} onClick={(e) => e.stopPropagation()}>
