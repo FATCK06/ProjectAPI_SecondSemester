@@ -165,10 +165,12 @@ export default function Sidebar() {
                     </Link>
                 </div>
 
-                <Link href="/cadastrar" className={`${styles.navLink} ${pathname === "/cadastrar" ? styles.active : ""}`}>
-                    <PlusCircle className={styles.linkIcon} size={20} />
-                    {!isCollapsed && <span>Cadastrar Normas</span>}
-                </Link>
+                {(userRole === "Administrador" || userRole === "Revisor") && (
+                    <Link href="/cadastrar" className={`${styles.navLink} ${pathname === "/cadastrar" ? styles.active : ""}`}>
+                        <PlusCircle className={styles.linkIcon} size={20} />
+                        {!isCollapsed && <span>Cadastrar Normas</span>}
+                    </Link>
+                )}
 
                 <Link href="/solicitacoes" className={`${styles.navLink} ${pathname === "/solicitacoes" ? styles.active : ""}`}>
                     <ClipboardList className={styles.linkIcon} size={20} />
@@ -182,12 +184,14 @@ export default function Sidebar() {
             {/* Estilos do Rodapé */}
             <div className={styles.footer}>
 
-                <div style={{ padding: '0 16px 12px 16px' }}>
-                    <Link href="/usuarios" className={`${styles.navLink} ${pathname === "/usuarios" ? styles.active : ""}`}>
-                        <Users className={styles.linkIcon} size={20} />
-                        {!isCollapsed && <span>Gerenciar Usuários</span>}
-                    </Link>
-                </div>
+                {userRole === "Administrador" && (
+                    <div style={{ padding: '0 16px 12px 16px' }}>
+                        <Link href="/usuarios" className={`${styles.navLink} ${pathname === "/usuarios" ? styles.active : ""}`}>
+                            <Users className={styles.linkIcon} size={20} />
+                            {!isCollapsed && <span>Gerenciar Usuários</span>}
+                        </Link>
+                    </div>
+                )}
 
                 <hr className={styles.separator} />
 
