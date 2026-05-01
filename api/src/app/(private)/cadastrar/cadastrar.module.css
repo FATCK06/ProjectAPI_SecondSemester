@@ -11,7 +11,6 @@
   margin-bottom: 32px;
 }
 
-/* Ajuste do layout grid dividindo em duas colunas, exatamente como o Figma */
 .grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr; /* Coluna esquerda ligeiramente maior */
