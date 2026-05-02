@@ -15,8 +15,20 @@ interface Norma {
   revisao_norma_obsoleta: string;
   caminho_arquivo: string | null;
   id_orgao: number;
+  id_categoria: number | null;
+  id_subcategoria: number | null;
+  id_tipo: number | null;
   tb_orgaos?: { nome_completo_orgao: string; sigla_orgao: string } | { nome_completo_orgao: string; sigla_orgao: string }[];
+  tb_categorias?: { nome_categoria: string } | { nome_categoria: string }[];
+  tb_subcategoria?: { nome_subcategoria: string } | { nome_subcategoria: string }[];
+  tb_tipo?: { nome_tipo: string } | { nome_tipo: string }[];
 }
+
+const getNomeSeguro = (obj: any, key: string) => {
+  if (!obj) return "—";
+  if (Array.isArray(obj)) return obj[0]?.[key] || "—";
+  return obj[key] || "—";
+};
 
 const normalizeText = (text: string | null | undefined) => {
   if (!text) return "";
@@ -32,23 +44,14 @@ const formatarDataSegura = (dataString: string | null) => {
   return dataString;
 };
 
-const getSafeDateYMD = (dataString: string | null) => {
-  if (!dataString) return "";
-  if (dataString.includes('/')) {
-    const [dia, mes, ano] = dataString.split('/');
-    return `${ano}-${mes}-${dia}`;
-  }
-  return dataString.split('T')[0];
-};
-
 export default function Home() {
   const [normas, setNormas] = useState<Norma[]>([]);
+  const [categoriasMap, setCategoriasMap] = useState<Record<number, string>>({});
   const [isLoading, setIsLoading] = useState(true);
   const [revisorNome, setRevisorNome] = useState("Não atribuído");
-  
+
   const [activeTab, setActiveTab] = useState<"todas" | "recentes" | "favoritas">("todas");
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchDate, setSearchDate] = useState(""); 
   
   const [favoritas, setFavoritas] = useState<number[]>([]);
   const [recentes, setRecentes] = useState<number[]>([]);
@@ -68,10 +71,21 @@ export default function Home() {
       setIsLoading(true);
       const { data: normasData } = await supabase
         .from("tb_normas")
-        .select(`*, tb_orgaos ( nome_completo_orgao, sigla_orgao )`)
+        .select(`*, tb_orgaos ( nome_completo_orgao, sigla_orgao ), tb_subcategoria ( nome_subcategoria ), tb_tipo ( nome_tipo )`)
         .order("id_norma", { ascending: false });
 
       if (normasData) setNormas(normasData as Norma[]);
+
+      // Categoria buscada separadamente e mapeada por id (FK pode não estar definida)
+      const { data: categoriasData } = await supabase
+        .from("tb_categorias")
+        .select("id_categoria, nome_categoria");
+
+      if (categoriasData) {
+        const mapa: Record<number, string> = {};
+        categoriasData.forEach((c: any) => { mapa[c.id_categoria] = c.nome_categoria; });
+        setCategoriasMap(mapa);
+      }
 
       const { data: revisorData } = await supabase
         .from("tb_usuarios")
@@ -139,18 +153,20 @@ export default function Home() {
     const term = normalizeText(searchTerm);
     const orgaoNome = normalizeText(getOrgaoNome(norma.tb_orgaos));
     const orgaoSigla = normalizeText(getOrgaoSigla(norma.tb_orgaos));
+    const categoriaNome = normalizeText(norma.id_categoria ? categoriasMap[norma.id_categoria] || "" : "");
+    const subCategoriaNome = normalizeText(getNomeSeguro(norma.tb_subcategoria, 'nome_subcategoria'));
+    const tipoNome = normalizeText(getNomeSeguro(norma.tb_tipo, 'nome_tipo'));
     const dataFormatada = formatarDataSegura(norma.data_publicacao_norma);
 
-    const matchesSearchTerm = 
+    return (
       normalizeText(norma.titulo_norma).includes(term) ||
       normalizeText(norma.codigo_norma).includes(term) ||
       orgaoNome.includes(term) || orgaoSigla.includes(term) ||
-      normalizeText(dataFormatada).includes(term);
-
-    const normaYMD = getSafeDateYMD(norma.data_publicacao_norma);
-    const matchesDateFilter = searchDate ? normaYMD === searchDate : true;
-
-    return matchesSearchTerm && matchesDateFilter;
+      categoriaNome.includes(term) ||
+      subCategoriaNome.includes(term) ||
+      tipoNome.includes(term) ||
+      normalizeText(dataFormatada).includes(term)
+    );
   });
 
   if (activeTab === "favoritas") filteredNormas = filteredNormas.filter((n) => favoritas.includes(n.id_norma));
@@ -178,10 +194,6 @@ export default function Home() {
             <input type="text" placeholder="Pesquisar norma, órgão ou sigla..." className={styles.searchInput} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </div>
           
-          <div className={styles.dateFilterContainer}>
-            <input type="date" className={styles.dateInput} value={searchDate} onChange={(e) => setSearchDate(e.target.value)} />
-            {searchDate && <button className={styles.clearDateBtn} onClick={() => setSearchDate("")}><X size={16} /></button>}
-          </div>
         </div>
       </div>
 
@@ -197,6 +209,7 @@ export default function Home() {
                 <th className={styles.th} style={{ width: '40px' }}></th>
                 <th className={styles.th}>Nome da Norma</th>
                 <th className={styles.th}>Órgão</th>
+                <th className={styles.th}>Categoria</th>
                 <th className={styles.th}>Tipo de Arquivo</th>
                 <th className={styles.th}>Data de Lançamento</th>
                 <th className={styles.th} style={{ textAlign: "center" }}>Ações</th>
@@ -219,6 +232,7 @@ export default function Home() {
                       </div>
                     </td>
                     <td className={styles.td}>{getOrgaoNome(norma.tb_orgaos)}</td>
+                    <td className={styles.td}>{norma.id_categoria ? (categoriasMap[norma.id_categoria] || "—") : "—"}</td>
                     <td className={styles.td}>
                       {norma.caminho_arquivo ? <span className={styles.tipoBadge}>PDF</span> : <span className={styles.tipoBadgeDisabled}>N/A</span>}
                     </td>

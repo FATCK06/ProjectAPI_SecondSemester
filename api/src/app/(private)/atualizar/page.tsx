@@ -231,7 +231,7 @@ useEffect(() => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Editar Norma</h1>
+      <h1 className={styles.title}>Atualizar Normas</h1>
 
       {mensagem.texto && (
         <div className={`${styles.alert} ${mensagem.tipo === 'erro' ? styles.alertError : styles.alertSuccess}`}>
@@ -239,11 +239,11 @@ useEffect(() => {
         </div>
       )}
 
-      <div className={styles.formGroup}>
+      <div className={styles.formGroup} style={{ marginBottom: '24px' }}>
   <label className={styles.label}>Selecione a Norma para Editar:</label>
-  <select 
-    className={styles.select} 
-    value={idNormaSelecionada} 
+  <select
+    className={styles.select}
+    value={idNormaSelecionada}
     onChange={(e) => setIdNormaSelecionada(e.target.value)}
   >
     <option value="">-- Escolha uma norma --</option>

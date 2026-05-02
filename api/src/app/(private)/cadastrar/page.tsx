@@ -1,14 +1,18 @@
 "use client";
 
 import { useState, useRef, useEffect, FormEvent } from "react";
-import { Plus, UploadCloud, FileText, Trash2, Lock } from "lucide-react";
+import { Plus, UploadCloud, FileText, Trash2, Lock, X } from "lucide-react";
 import styles from "./cadastrar.module.css";
-import { supabase } from "@/services/supabase"; 
+import { supabase } from "@/services/supabase";
 
 interface Orgao { id_orgao: number; nome_completo_orgao: string; }
 interface Categoria { id_categoria: number; nome_categoria: string; }
 interface SubCategoria { id_subcategoria: number; nome_subcategoria: string; }
 interface Tipo { id_tipo: number; nome_tipo: string; }
+interface NormaSugestao { id_norma: number; codigo_norma: string; titulo_norma: string; }
+
+const normalizar = (texto: string) =>
+  texto.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
 export default function CadastrarNorma() {
   // ==========================================
@@ -20,8 +24,14 @@ export default function CadastrarNorma() {
   const [dataCriacao, setDataCriacao] = useState("");
   const [revisaoAtual, setRevisaoAtual] = useState("");
   const [revisaoObsoleta, setRevisaoObsoleta] = useState("");
-  const [normasCorrelacionadas, setNormasCorrelacionadas] = useState("");
   const [palavrasChave, setPalavrasChave] = useState("");
+
+  // Normas Correlacionadas (autocomplete + chips)
+  const [listaNormasSugestoes, setListaNormasSugestoes] = useState<NormaSugestao[]>([]);
+  const [idsCorrelacionadas, setIdsCorrelacionadas] = useState<number[]>([]);
+  const [inputCorrelacao, setInputCorrelacao] = useState("");
+  const [mostrarSugestoes, setMostrarSugestoes] = useState(false);
+  const autocompleteRef = useRef<HTMLDivElement>(null);
   
   // Chaves estrangeiras selecionadas
   const [idOrgaoSelecionado, setIdOrgaoSelecionado] = useState<string>("");
@@ -56,9 +66,45 @@ export default function CadastrarNorma() {
 
       const { data: dadosCategorias } = await supabase.from('tb_categorias').select('id_categoria, nome_categoria');
       if (dadosCategorias) setCategorias(dadosCategorias);
+
+      const { data: dadosNormas } = await supabase
+        .from('tb_normas')
+        .select('id_norma, codigo_norma, titulo_norma')
+        .order('codigo_norma', { ascending: true });
+      if (dadosNormas) setListaNormasSugestoes(dadosNormas);
     }
     fetchInitialData();
   }, []);
+
+  // Fecha sugestões ao clicar fora
+  useEffect(() => {
+    function handleClickFora(e: MouseEvent) {
+      if (autocompleteRef.current && !autocompleteRef.current.contains(e.target as Node)) {
+        setMostrarSugestoes(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickFora);
+    return () => document.removeEventListener("mousedown", handleClickFora);
+  }, []);
+
+  const sugestoesFiltradas = listaNormasSugestoes
+    .filter((n) => !idsCorrelacionadas.includes(n.id_norma))
+    .filter((n) => {
+      if (!inputCorrelacao.trim()) return true;
+      const termo = normalizar(inputCorrelacao);
+      return normalizar(n.codigo_norma).includes(termo) || normalizar(n.titulo_norma).includes(termo);
+    })
+    .slice(0, 8);
+
+  const adicionarCorrelacao = (id: number) => {
+    setIdsCorrelacionadas((prev) => [...prev, id]);
+    setInputCorrelacao("");
+    setMostrarSugestoes(false);
+  };
+
+  const removerCorrelacao = (id: number) => {
+    setIdsCorrelacionadas((prev) => prev.filter((x) => x !== id));
+  };
 
   useEffect(() => {
     async function fetchSubCategorias() {
@@ -177,6 +223,18 @@ export default function CadastrarNorma() {
 
       if (normaError) throw normaError;
 
+      // Insere correlações (espelhadas: A↔B vira 2 linhas)
+      if (normaData && idsCorrelacionadas.length > 0) {
+        const linhasCorrelacao = idsCorrelacionadas.flatMap((idCorrel) => [
+          { id_norma_origem: normaData.id_norma, id_norma_correlacionada: idCorrel },
+          { id_norma_origem: idCorrel, id_norma_correlacionada: normaData.id_norma },
+        ]);
+        const { error: errCorrel } = await supabase
+          .from('tb_normas_correlacionadas')
+          .insert(linhasCorrelacao);
+        if (errCorrel) console.error('Erro ao inserir correlações:', errCorrel);
+      }
+
       // ==========================================
       // OPÇÃO B: MÚLTIPLOS ARQUIVOS (FUTURO)
       // ==========================================
@@ -206,9 +264,17 @@ export default function CadastrarNorma() {
       // Limpar formulário
       setCodigo(""); setTitulo(""); setEscopo(""); setDataCriacao("");
       setRevisaoAtual(""); setRevisaoObsoleta("");
-      setNormasCorrelacionadas(""); setPalavrasChave("");
+      setPalavrasChave("");
       setIdOrgaoSelecionado(""); setIdCategoriaSelecionada(""); setIdSubCategoriaSelecionada(""); setIdTipoSelecionado("");
       setFiles([]);
+      setIdsCorrelacionadas([]); setInputCorrelacao("");
+
+      // Recarrega a lista para incluir a norma recém-criada nas próximas sugestões
+      const { data: dadosNormas } = await supabase
+        .from('tb_normas')
+        .select('id_norma, codigo_norma, titulo_norma')
+        .order('codigo_norma', { ascending: true });
+      if (dadosNormas) setListaNormasSugestoes(dadosNormas);
 
     } catch (error) {
       const e = error as Error;
@@ -288,8 +354,60 @@ export default function CadastrarNorma() {
 
           <div className={styles.formGroup}>
             <label className={styles.label}>Normas Correlacionadas:</label>
-            <input type="text" className={styles.input} placeholder="Adicionar normas correlacionadas" 
-              value={normasCorrelacionadas} onChange={(e) => setNormasCorrelacionadas(e.target.value)} />
+
+            {idsCorrelacionadas.length > 0 && (
+              <div className={styles.chipsContainer}>
+                {idsCorrelacionadas.map((id) => {
+                  const n = listaNormasSugestoes.find((x) => x.id_norma === id);
+                  if (!n) return null;
+                  return (
+                    <div key={id} className={styles.chip}>
+                      <span>{n.codigo_norma}</span>
+                      <button
+                        type="button"
+                        className={styles.chipRemove}
+                        onClick={() => removerCorrelacao(id)}
+                        aria-label={`Remover ${n.codigo_norma}`}
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            <div className={styles.autocompleteWrapper} ref={autocompleteRef}>
+              <input
+                type="text"
+                className={styles.input}
+                placeholder="Digite código ou título da norma..."
+                value={inputCorrelacao}
+                onChange={(e) => { setInputCorrelacao(e.target.value); setMostrarSugestoes(true); }}
+                onFocus={() => setMostrarSugestoes(true)}
+              />
+
+              {mostrarSugestoes && sugestoesFiltradas.length > 0 && (
+                <ul className={styles.sugestoesList}>
+                  {sugestoesFiltradas.map((s) => (
+                    <li
+                      key={s.id_norma}
+                      className={styles.sugestaoItem}
+                      onClick={() => adicionarCorrelacao(s.id_norma)}
+                    >
+                      <span className={styles.sugestaoCodigo}>{s.codigo_norma}</span>
+                      <span className={styles.sugestaoTitulo}>{s.titulo_norma}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {mostrarSugestoes && inputCorrelacao && sugestoesFiltradas.length === 0 && (
+                <div className={styles.sugestoesList}>
+                  <div className={styles.sugestaoVazia}>Nenhuma norma encontrada</div>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className={styles.formGroup}>

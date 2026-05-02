@@ -31,23 +31,13 @@ const formatarDataSegura = (dataString: string | null) => {
   return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : dataString;
 };
 
-const getSafeDateYMD = (dataString: string | null) => {
-  if (!dataString) return "";
-  if (dataString.includes('/')) {
-    const [dia, mes, ano] = dataString.split('/');
-    return `${ano}-${mes}-${dia}`;
-  }
-  return dataString.split('T')[0];
-};
-
 export default function NormasGeral() {
   const [normas, setNormas] = useState<Norma[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [revisorNome, setRevisorNome] = useState("Não atribuído");
-  
+
   const [activeTab, setActiveTab] = useState<"todas" | "recentes" | "favoritas">("todas");
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchDate, setSearchDate] = useState(""); 
   
   const [favoritas, setFavoritas] = useState<number[]>([]);
   const [recentes, setRecentes] = useState<number[]>([]);
@@ -122,18 +112,15 @@ export default function NormasGeral() {
     const tipo = normalizeText(getNomeSeguro(n.tb_tipo, 'nome_tipo'));
     const dataFormatada = formatarDataSegura(n.data_publicacao_norma);
 
-    const matchesSearch = 
+    return (
       normalizeText(n.titulo_norma).includes(term) ||
       normalizeText(n.codigo_norma).includes(term) ||
       orgaoNome.includes(term) ||
       orgaoSigla.includes(term) ||
       subCat.includes(term) ||
       tipo.includes(term) ||
-      normalizeText(dataFormatada).includes(term);
-
-    const matchesDate = searchDate ? (getSafeDateYMD(n.data_publicacao_norma) === searchDate) : true;
-    
-    return matchesSearch && matchesDate;
+      normalizeText(dataFormatada).includes(term)
+    );
   });
 
   if (activeTab === "favoritas") filtered = filtered.filter(n => favoritas.includes(n.id_norma));
@@ -153,7 +140,6 @@ export default function NormasGeral() {
         </div>
         <div className={styles.filtersWrapper}>
           <div className={styles.searchContainer}><Search size={18} className={styles.searchIcon} /><input type="text" placeholder="Pesquisar norma..." className={styles.searchInput} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} /></div>
-          <div className={styles.dateFilterContainer}><input type="date" className={styles.dateInput} value={searchDate} onChange={(e) => setSearchDate(e.target.value)} />{searchDate && <button className={styles.clearDateBtn} onClick={() => setSearchDate("")}><X size={16} /></button>}</div>
         </div>
       </div>
 
