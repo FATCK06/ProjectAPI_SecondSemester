@@ -9,6 +9,7 @@ import {
     Wrench,
     ClipboardList,
     PlusCircle,
+    RefreshCw,
     Users,
     UserCircle,
     LogOut,
@@ -168,6 +169,11 @@ export default function Sidebar() {
                 <Link href="/cadastrar" className={`${styles.navLink} ${pathname === "/cadastrar" ? styles.active : ""}`}>
                     <PlusCircle className={styles.linkIcon} size={20} />
                     {!isCollapsed && <span>Cadastrar Normas</span>}
+                </Link>
+
+                <Link href="/atualizar" className={`${styles.navLink} ${pathname === "/atualizar" ? styles.active : ""}`}>
+                    <RefreshCw className={styles.linkIcon} size={20} />
+                    {!isCollapsed && <span>Atualizar Normas</span>}
                 </Link>
 
                 <Link href="/solicitacoes" className={`${styles.navLink} ${pathname === "/solicitacoes" ? styles.active : ""}`}>
