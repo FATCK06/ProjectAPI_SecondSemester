@@ -15,7 +15,8 @@
   <li><a href ="#backlog"> Backlog do Produto</a></li>
   <li><a href ="#dor">DoR</a></li>
   <li><a href ="#dod">DoD</a></li>
-  <li><a href ="#sprint"> Cronograma de Sprints</a></li>
+  <li><a href ="#sprint"> Backlog das Sprints</a></li>
+  <li><a href ="#docsprint"> Documentação das Sprints</a></li>
   <li><a href ="#midia">Mídia</a></li>
   <li><a href ="#tecnologias">Tecnologias</a></li>
   <li><a href ="#manual">Manual de Instalação</a></li>
@@ -31,6 +32,7 @@
 
 O objetivo principal do projeto é o desenvolvimento de uma plataforma web estruturada para centralizar, organizar e correlacionar requisitos normativos aeronáuticos. O sistema visa garantir maior organização, rastreabilidade e eficiência no processo de conformidade regulatória, servindo como uma fonte estruturada de dados para apoiar a análise de profissionais habilitados.
 
+
 ---
 
 ## 📋 Backlog do Produto <a id="backlog"></a>
@@ -42,15 +44,15 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 |  3   |   Alta  |         Como administrador, quero ter níveis de acesso, para garantir a segurança e integridade dos arquivos.          |     6      |   1   |    ✅   |     
 |  4   |    Alta    | Como consultor, quero filtrar normas por órgão, categoria ou palavra-chave, para localizar informações rapidamente.                                          |    5     |  1    |    ✅  |  
 |  5   |    Alta    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   1    |    ✅  | 
-|  6   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.              |     5      |   2   |    ⏳  |     
-|  7   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ⏳  |  
-|  8   |    Alta    | Como consultor, quero visualizar as versões de um item e suas normas correlacionadas na tela de detalhes, para ter acesso completo às informações necessárias para análise.                                          |    6    |   2    |    ⏳  |   
+|  6   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.              |     5      |   2   |    ✅  |     
+|  7   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ✅  |  
+|  8   |    Alta    | Como consultor, quero visualizar as versões de um item e suas normas correlacionadas na tela de detalhes, para ter acesso completo às informações necessárias para análise.                                          |    6    |   2    |    ✅  |   
 |  9   |    Média    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   3    |    ⏳  | 
 |  10   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
 
 
 ---
-## ⏰ Status das Sprints do Projeto
+## ⏰ Status das Sprints do Projeto <a id="sprint">
 
 
 
@@ -76,9 +78,9 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  6   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.              |     5      |   2   |    ⏳  |     
-|  7   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ⏳  |  
-|  8   |    Alta    | Como consultor, quero visualizar as versões de um item e suas normas correlacionadas na tela de detalhes, para ter acesso completo às informações necessárias para análise.                                          |    6    |   2    |    ⏳  |   
+|  6   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.              |     5      |   2   |    ✅  |     
+|  7   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ✅  |  
+|  8   |    Alta    | Como consultor, quero visualizar as versões de um item e suas normas correlacionadas na tela de detalhes, para ter acesso completo às informações necessárias para análise.                                          |    6    |   2    |    ✅  |   
 
 </details>
 
@@ -126,12 +128,12 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 ---
 
-## 📅 Cronograma de Sprints <a id="sprint"></a>
+## 📅 Cronograma de Sprints <a id="docsprint"></a>
 
 | Sprint          |    Período    | Documentação                                     | Status |
 | --------------- | :-----------: | ------------------------------------------------ | ----- |
 |  **SPRINT 1** | 16/03 - 05/04 | [Sprint1](docs/sprints/sprint1.md) | Concluído ✅    |
-|  **SPRINT 2** | 13/04 - 03/05 | [Sprint2](docs/sprints/sprint2.md) | Em andamento ⏳ |
+|  **SPRINT 2** | 13/04 - 03/05 | [Sprint2](docs/sprints/sprint2.md) | Concluído ✅ |
 |  **SPRINT 3** | 11/05 - 31/05 | [Sprint3](docs/sprints/sprint3.md) | Não iniciado ❌ |
 
 ---
@@ -175,7 +177,7 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
       <img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"/>
     </td>
     <td align="center">
-      <img src="https://img.shields.io/badge/MySQL-008ECC?style=for-the-badge&logo=MySQL&logoColor=white"/>
+      <img src="https://img.shields.io/badge/supabase-00A643?style=for-the-badge&logo=supabase&logoColor=white"/><br>
     </td>
     <td align="center">
       <img src="https://img.shields.io/badge/node.js-green?style=for-the-badge&logo=node.js&logoColor=white"/>
@@ -216,9 +218,13 @@ Adotamos um fluxo baseado em **GitFlow**:
 | `feat/pagina-login` | Front-End da página de login |
 | `feature/inserindo_banco` | Inserção do banco de dados |
 | `reorganize-folder-structure` | Organização da documentação |
-| `test-readme.md` | Modificação do README |
-| `docs/updateDocumentos` | Atualização dos documentos |
 | `docs/updateREADME` | Atualização do README |
+| `test-readme.md` | teste inicial do README |
+| `feat/corrigindocodigos` | Correção de conflitos no código |
+| `feat/PageSolicitacao` | Página de solicitação de normas |
+| `feat/CorrigindoTexto` | Padronização dos textos da tabela |
+| `feat/VizualizacaoDasVersoesDeNormasENormasCorrelacionadas` | Visualização das correlações de normas |
+| `feat/AtualizarNorma` | Página de atualização de normas |
 
 ---
 
@@ -292,7 +298,7 @@ Adotamos um padrão para manter o histórico legível e rastreável.
       <td>Vinícius Konishi Gregório</td>
       <td>Desenvolvedor</td>
       <td><a href="https://github.com/vinicius-konishi"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
-      <td><a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+      <td><a href="https://www.linkedin.com/in/vinícius-gregório-406640232"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
     </tr>
   </table>
 </div>
