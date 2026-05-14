@@ -5,8 +5,10 @@
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  9   |    Média    | Como Supervisor, eu quero adicionar o arquivo da norma, para que o sistema sempre mantenha o documento original referenciado e rastreável.                                        |    6    |   3    |    ⏳  | 
-|  10   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |                                   |    9     |   3    |    ⏳  |  
+|  9   |    Média    | Como consultor, quero sugerir normas
+para cadastrar, para que o sistema fique atualizado.   |    6    |   3    |    ⏳  | 
+|  10   |    Média    | Como supervisor, quero cadastrar novas categorias, para que o sistema reflita todas as categorias que usamos.      |    5     |   3    |    ⏳  |  
+|  11   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
 
 ---
 
