@@ -47,8 +47,7 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 |  6   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.              |     5      |   2   |    ✅  |     
 |  7   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ✅  |  
 |  8   |    Alta    | Como consultor, quero visualizar as versões de um item e suas normas correlacionadas na tela de detalhes, para ter acesso completo às informações necessárias para análise.                                          |    6    |   2    |    ✅  |   
-|  9   |    Média    | Como consultor, quero sugerir normas
-para cadastrar, para que o sistema fique atualizado.   |    6    |   3    |    ⏳  | 
+|  9   |    Média    | Como consultor, quero sugerir normas para cadastrar, para que o sistema fique atualizado.   |    6    |   3    |    ⏳  | 
 |  10   |    Média    | Como supervisor, quero cadastrar novas categorias, para que o sistema reflita todas as categorias que usamos.      |    5     |   3    |    ⏳  |  
 |  11   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
 
@@ -93,8 +92,7 @@ para cadastrar, para que o sistema fique atualizado.   |    6    |   3    |    �
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  9   |    Média    | Como consultor, quero sugerir normas
-para cadastrar, para que o sistema fique atualizado.   |    6    |   3    |    ⏳  | 
+|  9   |    Média    | Como consultor, quero sugerir normas para cadastrar, para que o sistema fique atualizado.   |    6    |   3    |    ⏳  | 
 |  10   |    Média    | Como supervisor, quero cadastrar novas categorias, para que o sistema reflita todas as categorias que usamos.      |    5     |   3    |    ⏳  |  
 |  11   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
 
