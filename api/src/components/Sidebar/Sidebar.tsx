@@ -19,7 +19,8 @@ import {
     Package,
     Blocks,
     Plug,
-    BookMarked
+    BookMarked,
+    Tag
 } from "lucide-react";
 import styles from "./Sidebar.module.css";
 import { supabase } from "@/services/supabase";
@@ -170,6 +171,13 @@ export default function Sidebar() {
                     <Link href="/cadastrar" className={`${styles.navLink} ${pathname === "/cadastrar" ? styles.active : ""}`}>
                         <PlusCircle className={styles.linkIcon} size={20} />
                         {!isCollapsed && <span>Cadastrar Normas</span>}
+                    </Link>
+                )}
+
+                {(userRole === "Administrador" || userRole === "Revisor") && (
+                    <Link href="/gerenciar-categorias" className={`${styles.navLink} ${pathname === "/gerenciar-categorias" ? styles.active : ""}`}>
+                        <Tag className={styles.linkIcon} size={20} />
+                        {!isCollapsed && <span>Gerenciar Categorias</span>}
                     </Link>
                 )}
 

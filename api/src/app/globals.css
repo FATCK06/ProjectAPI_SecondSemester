@@ -8,23 +8,32 @@
 }
 
 /* Deixando padrão */
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
+html,
 body {
+  height: 100%;
+  overflow: hidden;
   font-family: "Open Sans", sans-serif;
 }
 
-/* Para que Sidebar fique na esquerda e p contéudo na direita vou colocar no CSS global */
+/* Para que Sidebar fique na esquerda e o conteúdo na direita */
 
 .layout-sistema {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .conteudo-sistema {
-  flex: 1; 
+  flex: 1;
   background-color: #ffffff;
+  overflow-y: auto;
+  height: 100%;
 }
