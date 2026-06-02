@@ -159,7 +159,7 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 ## Site Sprint 2
 
 <div>
-  <a href=" https://youtu.be/sQcgKsjj8IE">Clique aqui e veja a segunda versão do nosso site!</a>
+  <a href="https://youtu.be/sQcgKsjj8IE">Clique aqui e veja a segunda versão do nosso site!</a>
 </div>
 
 ---
