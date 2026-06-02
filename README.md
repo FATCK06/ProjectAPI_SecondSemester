@@ -47,9 +47,9 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 |  6   |   Alta   | Como administrador, eu quero gerenciar usuários, para que apenas pessoas autorizadas tenham acesso ao sistema.              |     5      |   2   |    ✅  |     
 |  7   |    Alta  | Como supervisor, quero editar ou atualizar normas cadastradas, para que o sistema reflita as versões mais recentes das normas.                                         |    8      |   2    |    ✅  |  
 |  8   |    Alta    | Como consultor, quero visualizar as versões de um item e suas normas correlacionadas na tela de detalhes, para ter acesso completo às informações necessárias para análise.                                          |    6    |   2    |    ✅  |   
-|  9   |    Média    | Como consultor, quero sugerir normas para cadastrar, para que o sistema fique atualizado.   |    6    |   3    |    ⏳  | 
-|  10   |    Média    | Como supervisor, quero cadastrar novas categorias, para que o sistema reflita todas as categorias que usamos.      |    5     |   3    |    ⏳  |  
-|  11   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
+|  9   |    Média    | Como consultor, quero sugerir normas para cadastrar, para que o sistema fique atualizado.   |    6    |   3    |    ✅  | 
+|  10   |    Média    | Como supervisor, quero cadastrar novas categorias, para que o sistema reflita todas as categorias que usamos.      |    5     |   3    |    ✅  |  
+|  11   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ✅  |  
 
 
 ---
@@ -92,9 +92,9 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 | Rank | Prioridade | User Story  | Estimativa | Sprint | Status |
 | :--: | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :----: | :------------------: |
-|  9   |    Média    | Como consultor, quero sugerir normas para cadastrar, para que o sistema fique atualizado.   |    6    |   3    |    ⏳  | 
-|  10   |    Média    | Como supervisor, quero cadastrar novas categorias, para que o sistema reflita todas as categorias que usamos.      |    5     |   3    |    ⏳  |  
-|  11   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ⏳  |  
+|  9   |    Média    | Como consultor, quero sugerir normas para cadastrar, para que o sistema fique atualizado.   |    6    |   3    |    ✅  | 
+|  10   |    Média    | Como supervisor, quero cadastrar novas categorias, para que o sistema reflita todas as categorias que usamos.      |    5     |   3    |    ✅  |  
+|  11   |    Média    | Como administrador, quero restringir a captura e cópia do conteúdo das normas, para proteger documentos que possuem direitos de uso pagos.                                          |    9     |   3    |    ✅  |  
 
 </details>
 
@@ -135,7 +135,7 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 | --------------- | :-----------: | ------------------------------------------------ | ----- |
 |  **SPRINT 1** | 16/03 - 05/04 | [Sprint1](docs/sprints/sprint1.md) | Concluído ✅    |
 |  **SPRINT 2** | 13/04 - 03/05 | [Sprint2](docs/sprints/sprint2.md) | Concluído ✅ |
-|  **SPRINT 3** | 11/05 - 31/05 | [Sprint3](docs/sprints/sprint3.md) | Em andamento ⏳  |
+|  **SPRINT 3** | 11/05 - 31/05 | [Sprint3](docs/sprints/sprint3.md) | Concluído ✅  |
 
 ---
 
@@ -152,6 +152,22 @@ O objetivo principal do projeto é o desenvolvimento de uma plataforma web estru
 
 <div>
   <a href="https://youtu.be/ZfeW5FDXJu8?si=QwjEGQNgyN8eepiY">Clique aqui e veja a primeira versão do nosso site!</a>
+</div>
+
+---
+
+## Site Sprint 2
+
+<div>
+  <a href=" https://youtu.be/sQcgKsjj8IE">Clique aqui e veja a segunda versão do nosso site!</a>
+</div>
+
+---
+
+## Site Sprint 3
+
+<div>
+  <a href="https://youtu.be/Ylr-959Tl1k">Clique aqui e veja a terceira versão do nosso site!</a>
 </div>
 
 ---
@@ -281,11 +297,7 @@ Adotamos um padrão para manter o histórico legível e rastreável.
       <td><a href="https://www.linkedin.com/in/vinícius-silva-lopes-976217296/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
     </tr>
     <tr>
-      <td><img src="docs/public/members/rafael.jpg" width="60px" height="60px"></td>
-      <td>Rafael Oliveira</td>
-      <td>Desenvolvedor</td>
-      <td><a href="https://github.com/PatoJosefo"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a></td>
-      <td><a href="Front/https://www.linkedin.com/in/rafaelguimaraesoliveira"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a></td>
+      <td></td>
     </tr>
     <tr>
       <td><img src="docs/public/members/igor.jpg" width="60px" height="60px"></td>

@@ -37,7 +37,12 @@
 
 ---
 
-## 🎥 Mídia <a id="midia"></a>
+## 🎥 Mídia: <a id="midia"></a>
 
-### Site Sprint 2
-...
+## Site Sprint 2
+
+<div>
+  <a href=" https://youtu.be/sQcgKsjj8IE">Clique aqui e veja a segunda versão do nosso site!</a>
+</div>
+
+---
