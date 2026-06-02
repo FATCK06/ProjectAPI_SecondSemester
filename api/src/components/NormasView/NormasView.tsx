@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Eye, Star, Search, X, FileText, User, Calendar, CheckCircle, Archive, Link, ArrowLeft, Tag } from "lucide-react";
 import { supabase } from "@/services/supabase";
-import styles from "./home.module.css";
+import styles from "@/app/(private)/home/home.module.css";
 
 interface Norma {
   id_norma: number;
@@ -14,14 +14,11 @@ interface Norma {
   revisao_norma_atual: string;
   revisao_norma_obsoleta: string;
   caminho_arquivo: string | null;
-  id_orgao: number;
   id_categoria: number | null;
-  id_subcategoria: number | null;
-  id_tipo: number | null;
   id_usuario?: number | null;
-  tb_orgaos?: { nome_completo_orgao: string; sigla_orgao: string } | { nome_completo_orgao: string; sigla_orgao: string }[];
-  tb_subcategoria?: { nome_subcategoria: string } | { nome_subcategoria: string }[];
-  tb_tipo?: { nome_tipo: string } | { nome_tipo: string }[];
+  tb_orgaos?: { nome_completo_orgao: string; sigla_orgao: string } | any;
+  tb_subcategoria?: { nome_subcategoria: string } | any;
+  tb_tipo?: { nome_tipo: string } | any;
 }
 
 interface NormaResumida {
@@ -32,6 +29,12 @@ interface NormaResumida {
 
 interface ArquivoNorma {
   caminho_arquivo: string;
+}
+
+interface Props {
+  categoriaId: number;
+  titulo: string;
+  subtitulo: string;
 }
 
 const getNomeSeguro = (obj: any, key: string) => {
@@ -48,15 +51,12 @@ const normalizeText = (text: string | null | undefined) => {
 const formatarDataSegura = (dataString: string | null) => {
   if (!dataString) return "";
   if (dataString.includes('/')) return dataString;
-  const ymd = dataString.split('T')[0];
-  const parts = ymd.split('-');
-  if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
-  return dataString;
+  const parts = dataString.split('T')[0].split('-');
+  return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : dataString;
 };
 
-export default function Home() {
+export default function NormasView({ categoriaId, titulo, subtitulo }: Props) {
   const [normas, setNormas] = useState<Norma[]>([]);
-  const [categoriasMap, setCategoriasMap] = useState<Record<number, string>>({});
   const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState({ nome: "Não atribuído", role: "" });
 
@@ -70,7 +70,7 @@ export default function Home() {
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
   const [pdfUrl, setPdfUrl] = useState<string>("");
   const [isPdfLoading, setIsPdfLoading] = useState(false);
-  const [pdfNomeAtual, setPdfNomeAtual] = useState<string>("");
+  const [pdfNomeAtual, setPdfNomeAtual] = useState("");
 
   const [correlacionadas, setCorrelacionadas] = useState<NormaResumida[]>([]);
   const [isLoadingCorrel, setIsLoadingCorrel] = useState(false);
@@ -90,22 +90,13 @@ export default function Home() {
     async function fetchData() {
       setIsLoading(true);
 
-      const { data: normasData } = await supabase
+      const { data } = await supabase
         .from("tb_normas")
         .select(`*, tb_orgaos ( nome_completo_orgao, sigla_orgao ), tb_subcategoria ( nome_subcategoria ), tb_tipo ( nome_tipo )`)
+        .eq('id_categoria', categoriaId)
         .order("id_norma", { ascending: false });
 
-      if (normasData) setNormas(normasData as Norma[]);
-
-      const { data: categoriasData } = await supabase
-        .from("tb_categorias")
-        .select("id_categoria, nome_categoria");
-
-      if (categoriasData) {
-        const mapa: Record<number, string> = {};
-        categoriasData.forEach((c: any) => { mapa[c.id_categoria] = c.nome_categoria; });
-        setCategoriasMap(mapa);
-      }
+      if (data) setNormas(data as Norma[]);
 
       const { data: { user } } = await supabase.auth.getUser();
       let userQuery = supabase.from("tb_usuarios").select("nome_usuario, sobrenome_usuario, permissao_usuario");
@@ -130,7 +121,7 @@ export default function Home() {
     }
 
     fetchData();
-  }, []);
+  }, [categoriaId]);
 
   useEffect(() => {
     if (dropdownAberto === null) return;
@@ -143,26 +134,12 @@ export default function Home() {
     if (currentUser.role !== "Consultor" || !isPdfModalOpen) return;
 
     const bloquearTecla = (e: KeyboardEvent) => {
-      if (e.key === "PrintScreen") {
-        e.preventDefault();
-      }
+      if (e.key === "PrintScreen") e.preventDefault();
     };
 
     document.addEventListener("keydown", bloquearTecla);
     return () => document.removeEventListener("keydown", bloquearTecla);
   }, [currentUser.role, isPdfModalOpen]);
-
-  const getOrgaoNome = (orgaoData: Norma['tb_orgaos']) => {
-    if (!orgaoData) return "Desconhecido";
-    if (Array.isArray(orgaoData)) return orgaoData[0]?.nome_completo_orgao || "Desconhecido";
-    return orgaoData.nome_completo_orgao || "Desconhecido";
-  };
-
-  const getOrgaoSigla = (orgaoData: Norma['tb_orgaos']) => {
-    if (!orgaoData) return "";
-    if (Array.isArray(orgaoData)) return orgaoData[0]?.sigla_orgao || "";
-    return orgaoData.sigla_orgao || "";
-  };
 
   const handleOpenDetails = async (norma: Norma) => {
     setSelectedNorma(norma);
@@ -240,7 +217,7 @@ export default function Home() {
   const toggleFavorite = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
     setFavoritas((prev) => {
-      const newFavs = prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id];
+      const newFavs = prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id];
       localStorage.setItem('@normas_favoritas', JSON.stringify(newFavs));
       return newFavs;
     });
@@ -312,35 +289,28 @@ export default function Home() {
     return [];
   };
 
-  let filteredNormas = normas.filter((norma) => {
+  let filtered = normas.filter((norma) => {
     const term = normalizeText(searchTerm);
-    const orgaoNome = normalizeText(getOrgaoNome(norma.tb_orgaos));
-    const orgaoSigla = normalizeText(getOrgaoSigla(norma.tb_orgaos));
-    const categoriaNome = normalizeText(norma.id_categoria ? categoriasMap[norma.id_categoria] || "" : "");
-    const subCategoriaNome = normalizeText(getNomeSeguro(norma.tb_subcategoria, 'nome_subcategoria'));
-    const tipoNome = normalizeText(getNomeSeguro(norma.tb_tipo, 'nome_tipo'));
-    const dataFormatada = formatarDataSegura(norma.data_publicacao_norma);
-
     return (
       normalizeText(norma.titulo_norma).includes(term) ||
       normalizeText(norma.codigo_norma).includes(term) ||
-      orgaoNome.includes(term) || orgaoSigla.includes(term) ||
-      categoriaNome.includes(term) ||
-      subCategoriaNome.includes(term) ||
-      tipoNome.includes(term) ||
-      normalizeText(dataFormatada).includes(term)
+      normalizeText(getNomeSeguro(norma.tb_orgaos, 'nome_completo_orgao')).includes(term) ||
+      normalizeText(getNomeSeguro(norma.tb_orgaos, 'sigla_orgao')).includes(term) ||
+      normalizeText(getNomeSeguro(norma.tb_subcategoria, 'nome_subcategoria')).includes(term) ||
+      normalizeText(getNomeSeguro(norma.tb_tipo, 'nome_tipo')).includes(term) ||
+      normalizeText(formatarDataSegura(norma.data_publicacao_norma)).includes(term)
     );
   });
 
-  if (activeTab === "favoritas") filteredNormas = filteredNormas.filter((n) => favoritas.includes(n.id_norma));
-  else if (activeTab === "recentes") filteredNormas = filteredNormas.filter((n) => recentes.includes(n.id_norma));
+  if (activeTab === "favoritas") filtered = filtered.filter((n) => favoritas.includes(n.id_norma));
+  else if (activeTab === "recentes") filtered = filtered.filter((n) => recentes.includes(n.id_norma));
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
-          <h1 className={styles.title}>Normas e Regulamentos</h1>
-          <p className={styles.subtitle}>Gerencie e consulte todas as normas cadastradas no sistema.</p>
+          <h1 className={styles.title}>{titulo}</h1>
+          <p className={styles.subtitle}>{subtitulo}</p>
         </div>
       </div>
 
@@ -350,11 +320,10 @@ export default function Home() {
           <button className={`${styles.tabButton} ${activeTab === 'favoritas' ? styles.activeTab : ''}`} onClick={() => setActiveTab('favoritas')}>Normas Favoritadas</button>
           <button className={`${styles.tabButton} ${activeTab === 'todas' ? styles.activeTab : ''}`} onClick={() => setActiveTab('todas')}>Todas as Normas</button>
         </div>
-
         <div className={styles.filtersWrapper}>
           <div className={styles.searchContainer}>
             <Search size={18} className={styles.searchIcon} />
-            <input type="text" placeholder="Pesquisar norma, órgão ou sigla..." className={styles.searchInput} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+            <input type="text" placeholder="Pesquisar norma..." className={styles.searchInput} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </div>
         </div>
       </div>
@@ -362,7 +331,7 @@ export default function Home() {
       <div className={styles.tableWrapper}>
         {isLoading ? (
           <div className={styles.loading}>Carregando normas...</div>
-        ) : filteredNormas.length === 0 ? (
+        ) : filtered.length === 0 ? (
           <div className={styles.loading}>Nenhuma norma encontrada.</div>
         ) : (
           <table className={styles.table}>
@@ -371,14 +340,15 @@ export default function Home() {
                 <th className={styles.th} style={{ width: '40px' }}></th>
                 <th className={styles.th}>Nome da Norma</th>
                 <th className={styles.th}>Órgão</th>
-                <th className={styles.th}>Categoria</th>
+                <th className={styles.th}>Sub Categoria</th>
+                <th className={styles.th}>Tipo</th>
                 <th className={styles.th}>Tipo de Arquivo</th>
                 <th className={styles.th}>Data de Lançamento</th>
                 <th className={styles.th} style={{ textAlign: "center" }}>Ações</th>
               </tr>
             </thead>
             <tbody>
-              {filteredNormas.map((norma) => {
+              {filtered.map((norma) => {
                 const isFav = favoritas.includes(norma.id_norma);
                 return (
                   <tr key={norma.id_norma} className={styles.tr}>
@@ -393,14 +363,13 @@ export default function Home() {
                         <span className={styles.codigoNorma}>{norma.codigo_norma}</span>
                       </div>
                     </td>
-                    <td className={styles.td}>{getOrgaoNome(norma.tb_orgaos)}</td>
-                    <td className={styles.td}>{norma.id_categoria ? (categoriasMap[norma.id_categoria] || "—") : "—"}</td>
+                    <td className={styles.td}>{getNomeSeguro(norma.tb_orgaos, 'sigla_orgao')}</td>
+                    <td className={styles.td}>{getNomeSeguro(norma.tb_subcategoria, 'nome_subcategoria')}</td>
+                    <td className={styles.td}>{getNomeSeguro(norma.tb_tipo, 'nome_tipo')}</td>
                     <td className={styles.td}>
                       {norma.caminho_arquivo ? <span className={styles.tipoBadge}>PDF</span> : <span className={styles.tipoBadgeDisabled}>N/A</span>}
                     </td>
-                    <td className={styles.td}>
-                      {norma.data_publicacao_norma ? formatarDataSegura(norma.data_publicacao_norma) : "—"}
-                    </td>
+                    <td className={styles.td}>{formatarDataSegura(norma.data_publicacao_norma) || "—"}</td>
                     <td className={styles.td} style={{ textAlign: "center", position: "relative" }}>
                       <button
                         className={styles.visualizarBtn}
@@ -459,7 +428,7 @@ export default function Home() {
                   <div className={styles.iconCircle}><Calendar size={20} color="#7A2E44" /></div>
                   <div>
                     <span className={styles.detailLabel}>Data de Lançamento</span>
-                    <span className={styles.detailValue}>{selectedNorma.data_publicacao_norma ? formatarDataSegura(selectedNorma.data_publicacao_norma) : "Não definida"}</span>
+                    <span className={styles.detailValue}>{formatarDataSegura(selectedNorma.data_publicacao_norma) || "Não definida"}</span>
                   </div>
                 </div>
 
@@ -532,10 +501,7 @@ export default function Home() {
                 ) : getArquivosParaExibir().length === 0 ? (
                   <span className={styles.detailValue}>Sem arquivo anexado</span>
                 ) : getArquivosParaExibir().length === 1 ? (
-                  <button
-                    className={styles.arquivoItem}
-                    onClick={() => handleOpenPdf(getArquivosParaExibir()[0].caminho_arquivo)}
-                  >
+                  <button className={styles.arquivoItem} onClick={() => handleOpenPdf(getArquivosParaExibir()[0].caminho_arquivo)}>
                     <FileText size={16} />
                     <span>{getArquivosParaExibir()[0].caminho_arquivo.split('/').pop()}</span>
                     <Eye size={14} />

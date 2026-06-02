@@ -173,10 +173,12 @@ export default function Sidebar() {
                     </Link>
                 )}
 
-                <Link href="/atualizar" className={`${styles.navLink} ${pathname === "/atualizar" ? styles.active : ""}`}>
-                    <RefreshCw className={styles.linkIcon} size={20} />
-                    {!isCollapsed && <span>Atualizar Normas</span>}
-                </Link>
+                {(userRole === "Administrador" || userRole === "Revisor") && (
+                    <Link href="/atualizar" className={`${styles.navLink} ${pathname === "/atualizar" ? styles.active : ""}`}>
+                        <RefreshCw className={styles.linkIcon} size={20} />
+                        {!isCollapsed && <span>Atualizar Normas</span>}
+                    </Link>
+                )}
 
                 <Link href="/solicitacoes" className={`${styles.navLink} ${pathname === "/solicitacoes" ? styles.active : ""}`}>
                     <ClipboardList className={styles.linkIcon} size={20} />

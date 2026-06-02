@@ -10,6 +10,7 @@ interface Categoria { id_categoria: number; nome_categoria: string; }
 interface SubCategoria { id_subcategoria: number; nome_subcategoria: string; }
 interface Tipo { id_tipo: number; nome_tipo: string; }
 interface NormaSugestao { id_norma: number; codigo_norma: string; titulo_norma: string; }
+interface PalavraChaveSugestao { id_palavra_chave: number; termo_palavra_chave: string; }
 
 const normalizar = (texto: string) =>
   texto.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
@@ -24,14 +25,19 @@ export default function CadastrarNorma() {
   const [dataCriacao, setDataCriacao] = useState("");
   const [revisaoAtual, setRevisaoAtual] = useState("");
   const [revisaoObsoleta, setRevisaoObsoleta] = useState("");
-  const [palavrasChave, setPalavrasChave] = useState("");
-
   // Normas Correlacionadas (autocomplete + chips)
   const [listaNormasSugestoes, setListaNormasSugestoes] = useState<NormaSugestao[]>([]);
   const [idsCorrelacionadas, setIdsCorrelacionadas] = useState<number[]>([]);
   const [inputCorrelacao, setInputCorrelacao] = useState("");
   const [mostrarSugestoes, setMostrarSugestoes] = useState(false);
   const autocompleteRef = useRef<HTMLDivElement>(null);
+
+  // Palavras-chave (autocomplete + chips)
+  const [termosChave, setTermosChave] = useState<string[]>([]);
+  const [inputTermoChave, setInputTermoChave] = useState("");
+  const [sugestoesPalavras, setSugestoesPalavras] = useState<PalavraChaveSugestao[]>([]);
+  const [mostrarSugestoesPalavras, setMostrarSugestoesPalavras] = useState(false);
+  const autocompletePalavrasRef = useRef<HTMLDivElement>(null);
   
   // Chaves estrangeiras selecionadas
   const [idOrgaoSelecionado, setIdOrgaoSelecionado] = useState<string>("");
@@ -72,15 +78,23 @@ export default function CadastrarNorma() {
         .select('id_norma, codigo_norma, titulo_norma')
         .order('codigo_norma', { ascending: true });
       if (dadosNormas) setListaNormasSugestoes(dadosNormas);
+
+      const { data: dadosPalavras } = await supabase
+        .from('tb_palavra_chave')
+        .select('id_palavra_chave, termo_palavra_chave')
+        .order('termo_palavra_chave', { ascending: true });
+      if (dadosPalavras) setSugestoesPalavras(dadosPalavras);
     }
     fetchInitialData();
   }, []);
 
-  // Fecha sugestões ao clicar fora
   useEffect(() => {
     function handleClickFora(e: MouseEvent) {
       if (autocompleteRef.current && !autocompleteRef.current.contains(e.target as Node)) {
         setMostrarSugestoes(false);
+      }
+      if (autocompletePalavrasRef.current && !autocompletePalavrasRef.current.contains(e.target as Node)) {
+        setMostrarSugestoesPalavras(false);
       }
     }
     document.addEventListener("mousedown", handleClickFora);
@@ -104,6 +118,24 @@ export default function CadastrarNorma() {
 
   const removerCorrelacao = (id: number) => {
     setIdsCorrelacionadas((prev) => prev.filter((x) => x !== id));
+  };
+
+  const sugestoesPalavrasFiltradas = sugestoesPalavras
+    .filter((p) => !termosChave.map((t) => t.toLowerCase()).includes(p.termo_palavra_chave.toLowerCase()))
+    .filter((p) => !inputTermoChave.trim() || p.termo_palavra_chave.toLowerCase().includes(inputTermoChave.toLowerCase()))
+    .slice(0, 8);
+
+  const adicionarTermoChave = (termo: string) => {
+    const limpo = termo.trim();
+    if (limpo && !termosChave.map((t) => t.toLowerCase()).includes(limpo.toLowerCase())) {
+      setTermosChave((prev) => [...prev, limpo]);
+    }
+    setInputTermoChave("");
+    setMostrarSugestoesPalavras(false);
+  };
+
+  const removerTermoChave = (termo: string) => {
+    setTermosChave((prev) => prev.filter((t) => t !== termo));
   };
 
   useEffect(() => {
@@ -201,6 +233,20 @@ export default function CadastrarNorma() {
         filePath = uploadData.path; 
       }
 
+      let idUsuarioCriador: number | null = null;
+      const { data: { user } } = await supabase.auth.getUser();
+      let buscaUsuario = supabase.from("tb_usuarios").select("id_usuario");
+
+      if (user?.email) {
+        buscaUsuario = buscaUsuario.ilike("email_usuario", user.email);
+      } else {
+        const localUsername = localStorage.getItem("nome_usuario");
+        if (localUsername) buscaUsuario = buscaUsuario.ilike("nome_usuario", localUsername);
+      }
+
+      const { data: usuarioCriador } = await buscaUsuario.maybeSingle();
+      if (usuarioCriador) idUsuarioCriador = usuarioCriador.id_usuario;
+
       // 1. Inserir na tabela tb_normas
       const { data: normaData, error: normaError } = await supabase
         .from('tb_normas')
@@ -213,10 +259,11 @@ export default function CadastrarNorma() {
           revisao_norma_obsoleta: revisaoObsoleta,
           id_orgao: Number(idOrgaoSelecionado),
           status_norma: 0,
-          caminho_arquivo: filePath, // Salvando o caminho do arquivo (Opção A)
+          caminho_arquivo: filePath,
           id_categoria: idCategoriaSelecionada ? parseInt(idCategoriaSelecionada) : null,
           id_subcategoria: idSubCategoriaSelecionada ? parseInt(idSubCategoriaSelecionada) : null,
           id_tipo: idTipoSelecionado ? parseInt(idTipoSelecionado) : null,
+          id_usuario: idUsuarioCriador,
         })
         .select()
         .single(); 
@@ -232,24 +279,47 @@ export default function CadastrarNorma() {
         const { error: errCorrel } = await supabase
           .from('tb_normas_correlacionadas')
           .insert(linhasCorrelacao);
-        if (errCorrel) console.error('Erro ao inserir correlações:', errCorrel);
+        if (errCorrel) setMensagem({ tipo: "erro", texto: `Erro ao inserir correlações: ${errCorrel.message}` });
       }
 
-      // ==========================================
-      // OPÇÃO B: MÚLTIPLOS ARQUIVOS (FUTURO)
-      // ==========================================
-      /*
+      if (normaData && termosChave.length > 0) {
+        for (const termo of termosChave) {
+          let { data: existente } = await supabase
+            .from('tb_palavra_chave')
+            .select('id_palavra_chave')
+            .ilike('termo_palavra_chave', termo)
+            .maybeSingle();
+
+          let idPalavra = existente?.id_palavra_chave;
+
+          if (!idPalavra) {
+            const { data: nova } = await supabase
+              .from('tb_palavra_chave')
+              .insert({ termo_palavra_chave: termo })
+              .select('id_palavra_chave')
+              .single();
+            idPalavra = nova?.id_palavra_chave;
+          }
+
+          if (idPalavra) {
+            await supabase.from('tb_normas_palavras_chave').insert({
+              id_norma: normaData.id_norma,
+              id_palavra_chave: idPalavra,
+            });
+          }
+        }
+      }
+
       if (files.length > 0 && normaData) {
         for (const file of files) {
           const fileExt = file.name.split('.').pop();
           const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
-          
+
           const { data: uploadData, error: uploadError } = await supabase.storage
             .from('normas_pdfs')
-            .upload(`pdf/${normaData.id_norma}/${fileName}`, file);
-            
+            .upload(`pdf/${fileName}`, file);
+
           if (!uploadError && uploadData) {
-            // A coluna data_publicacao_arquivo não precisa ser enviada, o banco gera sozinha (DEFAULT CURRENT_TIMESTAMP)
             await supabase.from('tb_arquivos_normas').insert({
               id_norma: normaData.id_norma,
               caminho_arquivo: uploadData.path
@@ -257,17 +327,15 @@ export default function CadastrarNorma() {
           }
         }
       }
-      */
       
       setMensagem({ tipo: "sucesso", texto: "Norma e arquivo cadastrados com sucesso!" });
-      
-      // Limpar formulário
+
       setCodigo(""); setTitulo(""); setEscopo(""); setDataCriacao("");
       setRevisaoAtual(""); setRevisaoObsoleta("");
-      setPalavrasChave("");
       setIdOrgaoSelecionado(""); setIdCategoriaSelecionada(""); setIdSubCategoriaSelecionada(""); setIdTipoSelecionado("");
       setFiles([]);
       setIdsCorrelacionadas([]); setInputCorrelacao("");
+      setTermosChave([]); setInputTermoChave("");
 
       // Recarrega a lista para incluir a norma recém-criada nas próximas sugestões
       const { data: dadosNormas } = await supabase
@@ -278,7 +346,6 @@ export default function CadastrarNorma() {
 
     } catch (error) {
       const e = error as Error;
-      console.error("Erro ao inserir:", error);
       setMensagem({ tipo: "erro", texto: e.message || "Erro ao cadastrar norma." });
     } finally {
       setIsLoading(false);
@@ -411,9 +478,55 @@ export default function CadastrarNorma() {
           </div>
 
           <div className={styles.formGroup}>
-            <label className={styles.label}>Palavra-chave:</label>
-            <input type="text" className={styles.input} placeholder="Adicionar palavras-chave" 
-              value={palavrasChave} onChange={(e) => setPalavrasChave(e.target.value)} />
+            <label className={styles.label}>Palavras-chave:</label>
+
+            {termosChave.length > 0 && (
+              <div className={styles.chipsContainer}>
+                {termosChave.map((termo) => (
+                  <div key={termo} className={styles.chip}>
+                    <span>{termo}</span>
+                    <button type="button" className={styles.chipRemove} onClick={() => removerTermoChave(termo)}>
+                      <X size={14} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className={styles.autocompleteWrapper} ref={autocompletePalavrasRef}>
+              <input
+                type="text"
+                className={styles.input}
+                placeholder="Digite ou selecione uma palavra-chave..."
+                value={inputTermoChave}
+                onChange={(e) => { setInputTermoChave(e.target.value); setMostrarSugestoesPalavras(true); }}
+                onFocus={() => setMostrarSugestoesPalavras(true)}
+                onKeyDown={(e) => {
+                  if ((e.key === "Enter" || e.key === ",") && inputTermoChave.trim()) {
+                    e.preventDefault();
+                    adicionarTermoChave(inputTermoChave);
+                  }
+                }}
+              />
+
+              {mostrarSugestoesPalavras && sugestoesPalavrasFiltradas.length > 0 && (
+                <ul className={styles.sugestoesList}>
+                  {sugestoesPalavrasFiltradas.map((p) => (
+                    <li key={p.id_palavra_chave} className={styles.sugestaoItem} onClick={() => adicionarTermoChave(p.termo_palavra_chave)}>
+                      <span className={styles.sugestaoCodigo}>{p.termo_palavra_chave}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {mostrarSugestoesPalavras && inputTermoChave.trim() && sugestoesPalavrasFiltradas.length === 0 && (
+                <ul className={styles.sugestoesList}>
+                  <li className={styles.sugestaoItem} onClick={() => adicionarTermoChave(inputTermoChave)}>
+                    <span className={styles.sugestaoCodigo}>Criar: "{inputTermoChave.trim()}"</span>
+                  </li>
+                </ul>
+              )}
+            </div>
           </div>
         </div>
 
